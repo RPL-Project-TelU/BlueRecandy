@@ -18,5 +18,6 @@ namespace BlueRecandy.Models
 		[ForeignKey(nameof(OwnerId))]
 		public ApplicationUser Owner { get; set; }
 
+		public List<PurchaseLog> PurchaseLogs { get; set; }
 	}
 }

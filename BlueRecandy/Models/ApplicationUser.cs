@@ -13,5 +13,6 @@ namespace BlueRecandy.Models
 
 		public List<Product> OwnedProducts { get; set; }
 
+		public List<PurchaseLog> PurchaseLogs { get; set; }
 	}
 }

@@ -4,6 +4,7 @@ using BlueRecandy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlueRecandy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220406214640_RenameTable")]
+    partial class RenameTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,21 +121,6 @@ namespace BlueRecandy.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("BlueRecandy.Models.PurchaseLog", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("PurchaseLogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -284,25 +271,6 @@ namespace BlueRecandy.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("BlueRecandy.Models.PurchaseLog", b =>
-                {
-                    b.HasOne("BlueRecandy.Models.Product", "Product")
-                        .WithMany("PurchaseLogs")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("BlueRecandy.Models.ApplicationUser", "User")
-                        .WithMany("PurchaseLogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -357,13 +325,6 @@ namespace BlueRecandy.Migrations
             modelBuilder.Entity("BlueRecandy.Models.ApplicationUser", b =>
                 {
                     b.Navigation("OwnedProducts");
-
-                    b.Navigation("PurchaseLogs");
-                });
-
-            modelBuilder.Entity("BlueRecandy.Models.Product", b =>
-                {
-                    b.Navigation("PurchaseLogs");
                 });
 #pragma warning restore 612, 618
         }
