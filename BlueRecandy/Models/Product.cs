@@ -12,6 +12,8 @@ namespace BlueRecandy.Models
 		public string? Description { get; set; }
 		[Required]
 		public string DownloadURL { get; set; }
+		[Required]
+		public double Price { get; set; }
 
 		[Required]
 		public string OwnerId { get; set; }

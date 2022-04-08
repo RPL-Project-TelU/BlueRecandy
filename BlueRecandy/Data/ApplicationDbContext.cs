@@ -26,7 +26,7 @@ namespace BlueRecandy.Data
 			base.OnModelCreating(builder);
 		}
 
-		DbSet<Product> Products { get; set; }
-		DbSet<PurchaseLog> PurchaseLogs { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<PurchaseLog> PurchaseLogs { get; set; }
 	}
 }
