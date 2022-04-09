@@ -9,13 +9,16 @@
 <div>
     <h4>Product</h4>
     <hr />
+    <center>
     <dl class="row">
+        <article>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
+        </article>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -35,6 +38,7 @@
             @Html.DisplayFor(model => model.Owner.Id)
         </dd>
     </dl>
+    </center>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
