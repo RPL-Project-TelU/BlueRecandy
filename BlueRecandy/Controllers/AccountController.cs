@@ -1,30 +1,43 @@
 ﻿using BlueRecandy.Data;
 using BlueRecandy.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BlueRecandy.Controllers
 {
+	[Authorize]
 	public class AccountController : Controller
 	{
 
 		private readonly ApplicationDbContext _context;
-		public AccountController(ApplicationDbContext context)
+		private readonly UserManager<ApplicationUser> _userManager;
+
+		public AccountController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
 		{
 			_context = context;
+			_userManager = userManager;
 		}
 
 		public async Task<IActionResult> Purchase(int? id)
 		{
-			var product = await _context.Products.FindAsync(id);
-			
+			if (id == null)
+			{
+				return NotFound();
+			}
 
-			if (product == null)
+			var product = await _context.Products.FindAsync(id);
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			if (product == null || userId == null)
 			{
 				return NotFound();
 			}
 			else
 			{
 				PurchaseLog purchaseLog = new PurchaseLog();
+				purchaseLog.UserId = userId;
 			}
 
 

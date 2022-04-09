@@ -156,24 +156,5 @@ namespace BlueRecandy.Controllers
 			return _context.Products.Any(e => e.Id == id);
 		}
 
-		// INCOMPLETE
-		public async Task<IActionResult> Purchase(int? id)
-		{
-			if (id == null)
-			{
-				return NotFound();
-			}
-
-			Product product = await _context.Products.FindAsync(id);
-
-			if (product != null)
-			{
-				return View();
-			}
-			else
-			{
-				return NotFound();
-			}
-		}
 	}
 }
