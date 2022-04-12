@@ -1,46 +1,64 @@
-﻿@model BlueRecandy.Models.Product
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Web
+
+@model BlueRecandy.Models.Product
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Model.Name;
 }
 
-<h1>Details</h1>
+<div class="container mt-4 pt-4">
+    <div class="row">
+        <div class="col-6 border-bottom">
+            <h5>@Model.Name</h5>
+            <p>by @Model.Owner.UserName</p>
+        </div>
+        <div class="col-3">
+            @{
+                var user = await UserManager.GetUserAsync(User);
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <center>
-    <dl class="row">
-        <article>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        </article>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DownloadURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DownloadURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Owner)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Owner.Id)
-        </dd>
-    </dl>
-    </center>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                bool isSignedIn = SignInManager.IsSignedIn(User);
+                if (!isSignedIn)
+                {
+                    <a class="btn btn-success">Purchase</a>
+                }
+                else
+                {
+                    bool isOwner = Model.OwnerId == user.Id;
+                    if (isOwner)
+                    {
+                        <a class="btn btn-success">Download</a>
+                    }
+                    else
+                    {
+                        if (user.PurchaseLogs == null)
+                        {
+                            <a class="btn btn-success">Purchase</a>
+                        }
+                        else
+                        {
+                            PurchaseLog? log = user.PurchaseLogs.Find(x => x.ProductId == Model.Id);
+                            if (log != null)
+                            {
+                                <a class="btn btn-success">Download</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success">Purchase</a>
+                            }
+                        }
+                    }
+                }
+                
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <p>
+            @Model.Description
+        </p>
+    </div>
 </div>
