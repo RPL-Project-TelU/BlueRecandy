@@ -22,7 +22,7 @@
                 bool isSignedIn = SignInManager.IsSignedIn(User);
                 if (!isSignedIn)
                 {
-                    <a class="btn btn-success">Purchase</a>
+                    <a class="btn btn-success">Buy for $@Model.Price</a>
                 }
                 else
                 {
@@ -35,7 +35,7 @@
                     {
                         if (user.PurchaseLogs == null)
                         {
-                            <a class="btn btn-success">Purchase</a>
+                            <a class="btn btn-success">Buy for $@Model.Price</a>
                         }
                         else
                         {
@@ -46,7 +46,7 @@
                             }
                             else
                             {
-                                <a class="btn btn-success">Purchase</a>
+                                <a class="btn btn-success">Buy for $@Model.Price</a>
                             }
                         }
                     }

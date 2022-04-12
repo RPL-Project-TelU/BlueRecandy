@@ -62,7 +62,7 @@ namespace BlueRecandy.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,DownloadURL")] Product product)
+		public async Task<IActionResult> Create([Bind("Id,Name,Description,DownloadURL,Price")] Product product)
 		{
 			product.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 			_context.Add(product);

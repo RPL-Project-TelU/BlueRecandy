@@ -7,31 +7,33 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Product</h4>
-<p>@ViewData["UserId"]</p>
+<h5>Sell Product</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group mt-4 mb-4">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group mt-4 mb-4">
                 <label asp-for="DownloadURL" class="control-label"></label>
                 <input asp-for="DownloadURL" class="form-control" />
                 <span asp-validation-for="DownloadURL" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-4 mb-4">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" type="number" class="form-control" value="0" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4 mb-4">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4 mb-4">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

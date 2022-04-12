@@ -5,19 +5,31 @@
 }
 
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="card col-4 p-0 m-3">
-            <div class="card-header">
-                <h5>@item.Name</h5>
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card col-4 p-0 m-3">
+                <div class="card-header">
+                    <h5>@item.Name</h5>
+                </div>
+                <div class="card-body">
+                   @item.Description
+                </div>
+                <div class="card-footer">
+                    @{
+                        if (item.Price > 0)
+                        {
+                            <p class="float-start">$@item.Price</p>
+                        }
+                        else
+                        {
+                            <p class="float-start">Free</p>
+                        }
+                    }
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary float-end">Show</a>
+                </div>
             </div>
-            <div class="card-body">
-               @item.Description
-            </div>
-            <div class="card-footer">
-                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary float-end">Show</a>
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>

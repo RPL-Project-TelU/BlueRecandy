@@ -10,9 +10,13 @@ namespace BlueRecandy.Models
 		[Required]
 		public string Name { get; set; }
 		public string? Description { get; set; }
+
 		[Required]
+		[Display(Name = "Download URL")]
 		public string DownloadURL { get; set; }
+
 		[Required]
+		[Range(0, int.MaxValue)]
 		public double Price { get; set; }
 
 		[Required]
