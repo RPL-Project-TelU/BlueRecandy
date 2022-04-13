@@ -87,7 +87,7 @@
                             foreach (var item in purchaseLogs)
                             {
                                 <div class="container row">
-                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Pro" class="link-primary">@item.Product.Name</a>
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId" class="link-primary">@item.Product.Name</a>
                                     <hr />
                                 </div>
                             }
