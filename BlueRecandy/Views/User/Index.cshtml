@@ -1,6 +1,100 @@
-﻿@*
+﻿@using static BlueRecandy.Controllers.UserController
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     ViewData["Title"] = "User Manage";
 }
+
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-pills flex-column col-3">
+            <li class="nav-item">
+                @{
+                    if (ViewBag.ManagementPage == ManagementPage.Summary)
+                    {
+                        <a asp-action="Index" class="nav-link active">Summary</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" class="nav-link">Summary</a>
+                    }
+                }
+            </li>
+            <li class="nav-item">
+                @{
+                    if (ViewBag.ManagementPage == ManagementPage.YourProducts)
+                    {
+                        <a asp-action="ManageYourProducts" class="nav-link active">Your Products</a>
+                    }
+                    else
+                    {
+                        <a asp-action="ManageYourProducts" class="nav-link">Your Products</a>
+                    }
+                }
+            </li>
+            <li class="nav-item">
+                @{
+                    if (ViewBag.ManagementPage == ManagementPage.PurchaseLogs)
+                    {
+                        <a asp-action="ManagePurchaseLogs" class="nav-link active">Purchase Logs</a>
+                    }
+                    else
+                    {
+                        <a asp-action="ManagePurchaseLogs" class="nav-link">Purchase Logs</a>
+                    }
+                }
+            </li>
+        </ul>
+        <div class="col-9">
+            @{
+                ManagementPage page = ViewBag.ManagementPage;
+                ApplicationUser user = ViewBag.User;
+                IEnumerable<Product> products = ViewBag.Products;
+                IEnumerable<PurchaseLog> purchaseLogs = ViewBag.PurchaseLogs;
+
+                switch (page)
+                {
+                    case ManagementPage.Summary:
+                        <p>Wallet: $@user.Wallet</p>
+                        <p>Your Products: @products.Count()</p>
+                        <p>Purchased Products: @purchaseLogs.Count()</p>
+                        break;
+                    case ManagementPage.YourProducts:
+                        if (products == null)
+                        {
+                            <p>You don't have any products!</p>
+                        }
+                        else
+                        {
+                            foreach (var item in products)
+                            {
+                                <div class="container row">
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="link-primary">@item.Name</a>
+                                    <hr/>
+                                </div>
+                            }
+                        }
+                        break;
+                    case ManagementPage.PurchaseLogs:
+                        if (purchaseLogs == null)
+                        {
+                            <p>You don't have any purchase logs</p>
+                        }
+                        else
+                        {
+                            foreach (var item in purchaseLogs)
+                            {
+                                <div class="container row">
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Pro" class="link-primary">@item.Product.Name</a>
+                                    <hr />
+                                </div>
+                            }
+                        }
+                        break;
+                }
+            }
+        </div>
+    </div>
+</div>
