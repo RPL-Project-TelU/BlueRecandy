@@ -33,28 +33,38 @@ namespace BlueRecandy.Controllers
 			}
 
 			var product = await _context.Products.FindAsync(id);
-			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			var user = await _userManager.GetUserAsync(User);
 
 			PurchaseLog? purchaseLog;
 
-			if (product == null || userId == null)
+			if (product == null || user == null)
 			{
 				return NotFound();
 			}else
 			{
-				purchaseLog = await _context.PurchaseLogs.FindAsync(userId, product.Id);
+				purchaseLog = user.PurchaseLogs == null ? null : user.PurchaseLogs.Find(x => x.UserId == user.Id && x.ProductId == id.Value);
 				if (purchaseLog == null)
 				{
 
-					purchaseLog = new PurchaseLog();
-					purchaseLog.UserId = userId;
-					purchaseLog.User = _userManager.Users.First(x => x.Id == userId);
-					purchaseLog.ProductId = id.Value;
-					purchaseLog.Product = product;
+					if (user.Wallet >= product.Price)
+                    {
+						purchaseLog = new PurchaseLog();
+						purchaseLog.UserId = user.Id;
+						purchaseLog.User = user;
+						purchaseLog.ProductId = id.Value;
+						purchaseLog.Product = product;
 
-					_context.Add(purchaseLog);
-					await _context.SaveChangesAsync();
-					return RedirectToAction(controllerName: "Products", actionName: "Index");
+						_context.Add(purchaseLog);
+
+						user.Wallet -= product.Price;
+						await _context.SaveChangesAsync();
+						return RedirectToAction(controllerName: "Products", actionName: "PaymentProceed", routeValues: new { id = id, paymentSuccess = true });
+					}
+                    else
+                    {
+						// Error: Not enough balance
+						return RedirectToAction(controllerName: "Products", actionName: "PaymentProceed", routeValues: new { id = id, paymentSuccess = false });
+					}
 				}
 				else
 				{

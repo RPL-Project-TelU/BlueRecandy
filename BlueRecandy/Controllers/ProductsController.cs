@@ -41,6 +41,7 @@ namespace BlueRecandy.Controllers
 
 			var product = await _context.Products
 				.Include(p => p.Owner)
+				.Include(p => p.PurchaseLogs)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (product == null)
 			{
@@ -48,6 +49,28 @@ namespace BlueRecandy.Controllers
 			}
 
 			return View(product);
+		}
+
+
+		public async Task<IActionResult> PaymentProceed(int? id, bool paymentSuccess)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			var product = await _context.Products
+				.Include(p => p.Owner)
+				.Include(p => p.PurchaseLogs)
+				.FirstOrDefaultAsync(m => m.Id == id);
+			ViewBag.PaymentSuccess = paymentSuccess;
+
+			if (product == null)
+			{
+				return NotFound();
+			}
+
+			return View("Details", product);
 		}
 
 		// GET: Products/Create
