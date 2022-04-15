@@ -30,6 +30,14 @@ namespace BlueRecandy.Controllers
 			return View(await applicationDbContext.ToListAsync());
 		}
 
+		// GET: Products/ShowSearchForm
+		[AllowAnonymous]
+		public async Task<IActionResult> ShowSearchForm()
+		{
+			var applicationDbContext = _context.Products.Include(p => p.Owner);
+			return View();
+		}
+
 		// GET: Products/Details/5
 		[AllowAnonymous]
 		public async Task<IActionResult> Details(int? id)
