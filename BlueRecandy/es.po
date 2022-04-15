@@ -1,0 +1,2 @@
+﻿msgid "Welcome"
+msgstr "Bienvenido"

@@ -19,6 +19,23 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages().AddViewLocalization();
 
+builder.Services.AddPortableObjectLocalization()
+	.Configure<RequestLocalizationOptions>(options =>
+	{
+		var supportedCultures = new List<CultureInfo>
+		{
+			new CultureInfo("en"),
+			new CultureInfo("id"),
+			new CultureInfo("fr"),
+			new CultureInfo("es"),
+			new CultureInfo("ja")
+		};
+
+		options.DefaultRequestCulture = new RequestCulture("en");
+		options.SupportedCultures = supportedCultures;
+		options.SupportedUICultures = supportedCultures;
+
+	});
 
 var app = builder.Build();
 
