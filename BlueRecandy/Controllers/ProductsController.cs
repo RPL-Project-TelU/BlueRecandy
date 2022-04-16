@@ -43,6 +43,11 @@ namespace BlueRecandy.Controllers
 		public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
 		{
 			var applicationDbContext = _context.Products.Include(p => p.Owner);
+			ViewBag.SearchStatus = true;
+			if (SearchPhrase == null)
+			{
+				ViewBag.SearchStatus = false;
+			}
 			return View("Index", await _context.Products.Where(j => j.Description.Contains
 			(SearchPhrase)).ToListAsync());
 		}
