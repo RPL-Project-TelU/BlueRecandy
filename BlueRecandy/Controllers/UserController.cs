@@ -88,6 +88,10 @@ namespace BlueRecandy.Controllers
 				purchaseLog = user.PurchaseLogs == null ? null : user.PurchaseLogs.Find(x => x.UserId == user.Id && x.ProductId == id.Value);
 				if (purchaseLog == null)
 				{
+					if (product.OwnerId == user.Id)
+					{
+						return RedirectToAction(controllerName: "Products", actionName: "Details", routeValues: new { id = id });
+					}
 
 					if (user.Wallet >= product.Price)
                     {

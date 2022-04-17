@@ -7,7 +7,7 @@
     ViewData["Title"] = "User Manage";
 }
 
-<div class="container">
+<div class="container my-5">
     <div class="row">
         <ul class="nav nav-pills flex-column col-3">
             <li class="nav-item">
@@ -74,7 +74,16 @@
                             foreach (var item in products)
                             {
                                 <div class="container row">
-                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="link-primary">@item.Name</a>
+                                    <div class="container mb-3">
+                                        <div class="float-start">
+                                            <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="link-primary">@item.Name</a>
+                                        </div>
+                                        <div class="float-end flex-row">
+                                            <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="link-primary">Edit</a>
+                                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" class="link-primary">Delete</a>
+                                        </div>
+                                    </div>
+                                    
                                     <hr/>
                                 </div>
                             }
