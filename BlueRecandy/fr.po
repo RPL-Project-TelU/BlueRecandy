@@ -1,0 +1,65 @@
+﻿msgid "Welcome"
+msgstr "Bienvenue"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Products"
+msgstr "Produit"
+
+msgid "Manage"
+msgstr "Sorte"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Login"
+msgstr "Connexion"
+
+msgid "Log in"
+msgstr "Connexion"
+
+msgid "Use a local account to log in."
+msgstr "Utilisez un compte local pour vous connecter."
+
+msgid "Remember Me?"
+msgstr "Souviens-toi de moi?"
+
+msgid "Forgot your password?"
+msgstr "Mot de passe oublié?"
+
+msgid "Register as a new user"
+msgstr "S'inscrire en tant que nouvel utilisateur"
+
+msgid "Resend email confirmation"
+msgstr "Renvoyer l'e-mail de confirmation"
+
+msgid "Create a new account."
+msgstr "Créer un nouveau compte."
+
+msgid "Free"
+msgstr "Libre"
+
+msgid "Show"
+msgstr "Spectacle"
+
+msgid "Hello"
+msgstr "Bonjour"
+
+msgid "Logout"
+msgstr "Se déconnecter"
+
+msgid "en"
+msgstr "Anglais"
+
+msgid "es"
+msgstr "Espagnol"
+
+msgid "fr"
+msgstr "Français"
+
+msgid "id"
+msgstr "Indonésie"
+
+msgid "ja"
+msgstr "Japon"
