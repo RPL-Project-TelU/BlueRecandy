@@ -63,3 +63,12 @@ msgstr "Indonesia"
 
 msgid "ja"
 msgstr "Jepang"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "Search the Products"
+msgstr "Cari Produk"
+
+msgid "Back to List"
+msgstr "Kembali ke Daftar"

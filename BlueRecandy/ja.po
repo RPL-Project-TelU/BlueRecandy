@@ -63,3 +63,12 @@ msgstr "インドネシア"
 
 msgid "ja"
 msgstr "日本"
+
+msgid "Search"
+msgstr "探す"
+
+msgid "Search the Products"
+msgstr "製品を検索する"
+
+msgid "Back to List"
+msgstr "リストに戻る"

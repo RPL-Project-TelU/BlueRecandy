@@ -30,11 +30,11 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">@T["Manage"]</a>
                         </li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ShowSearchForm">@T["Search"]</a>
+                        </li>
                         <li class="nav-link" > 
                             <partial name="_Culture"/>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ShowSearchForm">Search</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
