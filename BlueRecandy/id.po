@@ -1,2 +1,50 @@
 ﻿msgid "Welcome"
 msgstr "Selamat Datang"
+
+msgid "Home"
+msgstr "Beranda"
+
+msgid "Products"
+msgstr "Produk"
+
+msgid "Manage"
+msgstr "Kelola"
+
+msgid "Register"
+msgstr "Daftar"
+
+msgid "Login"
+msgstr "Masuk"
+
+msgid "Log in"
+msgstr "Masuk"
+
+msgid "Use a local account to log in."
+msgstr "Masuk menggunakan lokal akun"
+
+msgid "Remember Me?"
+msgstr "Ingat Saya?"
+
+msgid "Forgot your password?"
+msgstr "Lupa Katasandi?"
+
+msgid "Register as a new user"
+msgstr "Daftar Sebagai Akun Baru"
+
+msgid "Resend email confirmation"
+msgstr "Kirim email konfirmasi"
+
+msgid "Create a new account."
+msgstr "Buat Akun Baru"
+
+msgid "Free"
+msgstr "Gratis"
+
+msgid "Show"
+msgstr "Lihat"
+
+msgid "Hello"
+msgstr "Hallo"
+
+msgid "Logout"
+msgstr "Keluar"

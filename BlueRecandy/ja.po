@@ -1,2 +1,50 @@
 ﻿msgid "Welcome"
 msgstr "いらっしゃいませ"
+
+msgid "Home"
+msgstr "家"
+
+msgid "Products"
+msgstr "製品"
+
+msgid "Manage"
+msgstr "管理"
+
+msgid "Register"
+msgstr "登録"
+
+msgid "Login"
+msgstr "ログイン"
+
+msgid "Log in"
+msgstr "ログイン"
+
+msgid "Use a local account to log in."
+msgstr "ローカルアカウントを使用してログインします。"
+
+msgid "Remember Me?"
+msgstr "私を覚えてますか？"
+
+msgid "Forgot your password?"
+msgstr "パスワードをお忘れですか？"
+
+msgid "Register as a new user"
+msgstr "新規ユーザーとして登録"
+
+msgid "Resend email confirmation"
+msgstr "確認メールを再送信する"
+
+msgid "Create a new account."
+msgstr "新しいアカウントを作成します。"
+
+msgid "Free"
+msgstr "無料"
+
+msgid "Show"
+msgstr "スペクタクル"
+
+msgid "Hello"
+msgstr "こんにちは"
+
+msgid "Logout"
+msgstr "ログアウト"

@@ -1,2 +1,50 @@
 ﻿msgid "Welcome"
 msgstr "Bienvenido"
+
+msgid "Home"
+msgstr "Casa"
+
+msgid "Products"
+msgstr "Productos"
+
+msgid "Manage"
+msgstr "Gestionar"
+
+msgid "Register"
+msgstr "Registro"
+
+msgid "Login"
+msgstr "Acceso"
+
+msgid "Log in"
+msgstr "Acceso"
+
+msgid "Use a local account to log in."
+msgstr "Utilice una cuenta local para iniciar sesión."
+
+msgid "Remember Me?"
+msgstr "Recuérdame?"
+
+msgid "Forgot your password?"
+msgstr "Olvidaste tu contraseña?"
+
+msgid "Register as a new user"
+msgstr "Registrarse como nuevo usuario"
+
+msgid "Resend email confirmation"
+msgstr "Reenviar correo electrónico de confirmación"
+
+msgid "Create a new account."
+msgstr "Crea una cuenta nueva."
+
+msgid "Free"
+msgstr "LGraties"
+
+msgid "Show"
+msgstr "Espectáculo"
+
+msgid "Hello"
+msgstr "Hola"
+
+msgid "Logout"
+msgstr "Cerrar sesión"
