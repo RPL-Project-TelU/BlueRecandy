@@ -48,3 +48,18 @@ msgstr "こんにちは"
 
 msgid "Logout"
 msgstr "ログアウト"
+
+msgid "en"
+msgstr "英語"
+
+msgid "es"
+msgstr "スペイン語"
+
+msgid "fr"
+msgstr "フランス語"
+
+msgid "id"
+msgstr "インドネシア"
+
+msgid "ja"
+msgstr "日本"

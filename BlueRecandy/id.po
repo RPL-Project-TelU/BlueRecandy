@@ -26,16 +26,16 @@ msgid "Remember Me?"
 msgstr "Ingat Saya?"
 
 msgid "Forgot your password?"
-msgstr "Lupa Katasandi?"
+msgstr "Lupa kata sandi?"
 
 msgid "Register as a new user"
-msgstr "Daftar Sebagai Akun Baru"
+msgstr "Daftar sebagai akun baru"
 
 msgid "Resend email confirmation"
 msgstr "Kirim email konfirmasi"
 
 msgid "Create a new account."
-msgstr "Buat Akun Baru"
+msgstr "Buat akun baru"
 
 msgid "Free"
 msgstr "Gratis"
@@ -48,3 +48,18 @@ msgstr "Hallo"
 
 msgid "Logout"
 msgstr "Keluar"
+
+msgid "en"
+msgstr "Inggris"
+
+msgid "es"
+msgstr "Spanyol"
+
+msgid "fr"
+msgstr "Prancis"
+
+msgid "id"
+msgstr "Indonesia"
+
+msgid "ja"
+msgstr "Jepang"

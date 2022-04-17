@@ -1,0 +1,14 @@
+﻿msgid "en"
+msgstr "English"
+
+msgid "es"
+msgstr "Spanish"
+
+msgid "fr"
+msgstr "French"
+
+msgid "id"
+msgstr "Indonesia"
+
+msgid "ja"
+msgstr "Japan"

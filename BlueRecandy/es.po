@@ -48,3 +48,18 @@ msgstr "Hola"
 
 msgid "Logout"
 msgstr "Cerrar sesión"
+
+msgid "en"
+msgstr "Inglés"
+
+msgid "es"
+msgstr "Español"
+
+msgid "fr"
+msgstr "Francés"
+
+msgid "id"
+msgstr "Indonesia"
+
+msgid "ja"
+msgstr "Japón"
