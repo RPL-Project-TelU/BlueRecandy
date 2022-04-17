@@ -8,15 +8,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BlueRecandy.Data;
 using BlueRecandy.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace BlueRecandy.Controllers
 {
+    [Authorize] 
     public class FeedbacksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _UserManager;
 
-        public FeedbacksController(ApplicationDbContext context)
+        public FeedbacksController(ApplicationDbContext context, UserManager<ApplicationUser> UserManager)
         {
+            _UserManager = UserManager;
             _context = context;
         }
 
@@ -48,9 +53,10 @@ namespace BlueRecandy.Controllers
         }
 
         // GET: Feedbacks/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "DownloadURL");
+
+            ViewData["ProductId"] = id;
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -60,17 +66,15 @@ namespace BlueRecandy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FeedbackContent,Rating,ProductId,UserId")] Feedback feedback)
+        public async Task<IActionResult> Create([Bind("Id,FeedbackContent,Rating,ProductId")] Feedback feedback)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(feedback);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "DownloadURL", feedback.ProductId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", feedback.UserId);
-            return View(feedback);
+            var user = await _UserManager.GetUserAsync(User);
+
+            feedback.User = user;
+            feedback.UserId = user.Id;
+            _context.Add(feedback);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Feedbacks/Edit/5
