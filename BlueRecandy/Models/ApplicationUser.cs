@@ -13,8 +13,6 @@ namespace BlueRecandy.Models
 
 		public double Wallet { get; set; }
 
-		public List<Product> OwnedProducts { get; set; }
-
 		public List<PurchaseLog> PurchaseLogs { get; set; }
 	}
 }
