@@ -31,7 +31,7 @@ namespace BlueRecandy.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CultureManagement(String culture)
+		public IActionResult CultureManagement(string culture)
         {
 			Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
 				new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) });

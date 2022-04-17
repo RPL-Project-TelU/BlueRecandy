@@ -8,7 +8,7 @@
 }
 
 <div>
-    <form asp-action="CultureManagement" asp-controller="Home" method="post" >
+    <form asp-action="CultureManagement" asp-controller="Home" method="post"> 
         <select name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList"
         onchange="this.form.submit();"></select>
     </form>
