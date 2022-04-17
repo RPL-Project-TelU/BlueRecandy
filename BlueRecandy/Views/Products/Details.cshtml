@@ -47,7 +47,7 @@
                     bool isOwner = Model.OwnerId == user.Id;
                     if (isOwner)
                     {
-                        <a class="btn btn-success">Download</a>
+                        <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
                     }
                     else
                     {
@@ -60,7 +60,7 @@
                         }
                         else
                         {
-                            <a class="btn btn-success">Download</a>
+                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
                         }
                     }
                 }

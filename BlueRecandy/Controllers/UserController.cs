@@ -75,7 +75,7 @@ namespace BlueRecandy.Controllers
 				return NotFound();
 			}
 
-			var product = await _context.Products.FindAsync(id);
+			var product = await _context.Products.Include(p => p.PurchaseLogs).FirstAsync(p => p.Id == id);
 			var user = await _userManager.GetUserAsync(User);
 
 			PurchaseLog? purchaseLog;
@@ -85,7 +85,7 @@ namespace BlueRecandy.Controllers
 				return NotFound();
 			}else
 			{
-				purchaseLog = user.PurchaseLogs == null ? null : user.PurchaseLogs.Find(x => x.UserId == user.Id && x.ProductId == id.Value);
+				purchaseLog = product.PurchaseLogs.Find(pl => pl.UserId == user.Id);
 				if (purchaseLog == null)
 				{
 					if (product.OwnerId == user.Id)
