@@ -17,11 +17,11 @@ namespace BlueRecandy.Controllers
     public class FeedbacksController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _UserManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FeedbacksController(ApplicationDbContext context, UserManager<ApplicationUser> UserManager)
+        public FeedbacksController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _UserManager = UserManager;
+            _userManager = userManager;
             _context = context;
         }
 
@@ -53,10 +53,10 @@ namespace BlueRecandy.Controllers
         }
 
         // GET: Feedbacks/Create
-        public IActionResult Create(int id)
+        public IActionResult Create(int? productId)
         {
-
-            ViewData["ProductId"] = id;
+            ViewBag.ProductId = productId;
+            TempData["ProductId"] = productId;
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -66,14 +66,18 @@ namespace BlueRecandy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FeedbackContent,Rating,ProductId")] Feedback feedback)
+        public async Task<IActionResult> Create([Bind("Id,FeedbackContent,Rating")] Feedback feedback)
         {
-            var user = await _UserManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
-            feedback.User = user;
+            var productId = TempData["ProductId"];
+
             feedback.UserId = user.Id;
+            feedback.ProductId = (int)productId;
+
             _context.Add(feedback);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

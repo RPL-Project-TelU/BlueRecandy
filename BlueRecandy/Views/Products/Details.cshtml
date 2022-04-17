@@ -29,7 +29,7 @@
         }
     }
     <div class="row">
-        <div class="col-6 border-bottom">
+        <div class="col-9 border-bottom">
             <h5>@Model.Name</h5>
             <p>by @Model.Owner.UserName</p>
         </div>
@@ -63,8 +63,8 @@
                             <a class="btn btn-success">Download</a>
                         }
                     }
+                    <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">Give Feedback</a>
                 }
-                
             }
         </div>
     </div>

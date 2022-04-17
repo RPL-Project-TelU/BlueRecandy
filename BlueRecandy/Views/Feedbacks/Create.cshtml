@@ -4,18 +4,18 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create Feedback</h1>
 
-<h4>Feedback</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" asp-route-id="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FeedbackContent" class="control-label"></label>
-                <input asp-for="FeedbackContent" class="form-control" />
-                <span asp-validation-for="FeedbackContent" class="text-danger"></span>
+                <textarea asp-for="FeedbackContent" class="form-control" ></textarea>
+
+                <span asp-validation-for="FeedbackContent" data-val class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rating" class="control-label"></label>
@@ -23,19 +23,33 @@
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
-              
-                <label asp-for="ProductId" class="control-label"></label>
-                <Input asp-for="ProductId" class ="form-control" value="@ViewData["ProductId"]"/>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                @{
+                    if (ViewBag.ProductId == null)
+                    {
+                        <input type="submit" value="Create" class="btn btn-primary" disabled/>
+                    }
+                    else
+                    {
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    }
+                }
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @{
+        if (ViewBag.ProductId == null)
+        {
+            <a asp-controller="Products" asp-action="Index">Back to Product List</a>
+        }
+        else
+        {
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@ViewBag.ProductId">Back to Product</a>
+        }
+    }
+    
 </div>
 
 @section Scripts {
