@@ -48,7 +48,7 @@ namespace BlueRecandy.Controllers
 			{
 				ViewBag.SearchStatus = false;
 			}
-			return View("Index", await _context.Products.Where(j => j.Description.Contains
+			return View("Index", await _context.Products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains
 			(SearchPhrase)).ToListAsync());
 		}
 
