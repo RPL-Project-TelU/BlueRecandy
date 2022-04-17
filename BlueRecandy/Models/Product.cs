@@ -25,5 +25,7 @@ namespace BlueRecandy.Models
 		public ApplicationUser Owner { get; set; }
 
 		public List<PurchaseLog> PurchaseLogs { get; set; }
+
+		public List<Feedback> ProductFeedbacks { get; set; }
 	}
 }
