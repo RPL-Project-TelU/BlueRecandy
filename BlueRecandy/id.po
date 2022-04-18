@@ -130,28 +130,39 @@ msgstr "Kata sandi"
 msgid "Confirm Password"
 msgstr "Konfirmasi Kata sandi"
 
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
+msgid "Sell Product"
+msgstr "Jual Produk"
+
+msgid "Price"
+msgstr "Harga"
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Product Not Found"
+msgstr "Produk Tidak Ditemukan"
+
+msgid "Summary"
+msgstr "Ringkasan"
+
+msgid "Your Products"
+msgstr "Produk Anda"
+
+msgid "Purchase Logs"
+msgstr "Log Pembelian"
+
+msgid "Upload Product"
+msgstr "Unggah Produk"
+
+msgid "Wallet"
+msgstr "Dompet"
+
+msgid "Purchased Products"
+msgstr "Produk yang Dibeli"
+
 msgid ""
 msgstr ""
 msgid ""

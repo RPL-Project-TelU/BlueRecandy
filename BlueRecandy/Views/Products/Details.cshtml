@@ -20,11 +20,11 @@
             @{
                 if (paymentSuccess)
                 {
-                    <p class="text-center text-success">Product @Model.Name has been purchased!</p>
+                    <p class="text-center text-success">@T["Product"] @Model.Name has been purchased!</p>
                 }
                 else
                 {
-                    <p class="text-center text-danger">Product @Model.Name failed to purchase!</p>
+                    <p class="text-center text-danger">@T["Product"] @Model.Name failed to purchase!</p>
                 }
             }
             </div>

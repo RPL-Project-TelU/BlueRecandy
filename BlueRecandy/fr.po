@@ -129,3 +129,36 @@ msgstr "Mot de passe"
 
 msgid "Confirm Password"
 msgstr "Confirmer le mot de passe"
+
+msgid "Sell Product"
+msgstr "Vendre un Produit"
+
+msgid "Price"
+msgstr "Prix"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Product Not Found"
+msgstr "Produit Introuvable"
+
+msgid "Summary"
+msgstr "Résumé"
+
+msgid "Your Products"
+msgstr "Vos Produits"
+
+msgid "Purchase Logs"
+msgstr "Acheter des Journaux"
+
+msgid "Upload Product"
+msgstr "Télécharger le Produit"
+
+msgid "Wallet"
+msgstr "Porte Monnaie"
+
+msgid "Purchased Products"
+msgstr "Produits Achetés"

@@ -1,4 +1,6 @@
-﻿@using static BlueRecandy.Controllers.UserController
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using static BlueRecandy.Controllers.UserController
+@inject IViewLocalizer T
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,11 +16,11 @@
                 @{
                     if (ViewBag.ManagementPage == ManagementPage.Summary)
                     {
-                        <a asp-action="Index" class="nav-link active">Summary</a>
+                        <a asp-action="Index" class="nav-link active">@T["Summary"]</a>
                     }
                     else
                     {
-                        <a asp-action="Index" class="nav-link">Summary</a>
+                        <a asp-action="Index" class="nav-link">@T["Summary"]</a>
                     }
                 }
             </li>
@@ -26,11 +28,11 @@
                 @{
                     if (ViewBag.ManagementPage == ManagementPage.YourProducts)
                     {
-                        <a asp-action="ManageYourProducts" class="nav-link active">Your Products</a>
+                        <a asp-action="ManageYourProducts" class="nav-link active">@T["Your Products"]</a>
                     }
                     else
                     {
-                        <a asp-action="ManageYourProducts" class="nav-link">Your Products</a>
+                        <a asp-action="ManageYourProducts" class="nav-link">@T["Your Products"]</a>
                     }
                 }
             </li>
@@ -38,16 +40,16 @@
                 @{
                     if (ViewBag.ManagementPage == ManagementPage.PurchaseLogs)
                     {
-                        <a asp-action="ManagePurchaseLogs" class="nav-link active">Purchase Logs</a>
+                        <a asp-action="ManagePurchaseLogs" class="nav-link active">@T["Purchase Logs"]</a>
                     }
                     else
                     {
-                        <a asp-action="ManagePurchaseLogs" class="nav-link">Purchase Logs</a>
+                        <a asp-action="ManagePurchaseLogs" class="nav-link">@T["Purchase Logs"]</a>
                     }
                 }
             </li>
             <li class="nav-item">
-                <a asp-action="Create" asp-controller="Products" class="nav-link">Upload Product</a>
+                <a asp-action="Create" asp-controller="Products" class="nav-link">@T["Upload Product"]</a>
             </li>
         </ul>
         <div class="col-9">
@@ -60,9 +62,9 @@
                 switch (page)
                 {
                     case ManagementPage.Summary:
-                        <p>Wallet: $@user.Wallet</p>
-                        <p>Your Products: @products.Count()</p>
-                        <p>Purchased Products: @purchaseLogs.Count()</p>
+                        <p>@T["Wallet"]: $@user.Wallet</p>
+                        <p>@T["Your Products"]: @products.Count()</p>
+                        <p>@T["Purchased Products"]: @purchaseLogs.Count()</p>
                         break;
                     case ManagementPage.YourProducts:
                         if (products == null)
@@ -79,8 +81,8 @@
                                             <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="link-primary">@item.Name</a>
                                         </div>
                                         <div class="float-end flex-row">
-                                            <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="link-primary">Edit</a>
-                                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" class="link-primary">Delete</a>
+                                            <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="link-primary">@T["Edit"]</a>
+                                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id" class="link-primary">@T["Delete"]</a>
                                         </div>
                                     </div>
                                     

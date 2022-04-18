@@ -129,3 +129,36 @@ msgstr "パスワード"
 
 msgid "Confirm Password"
 msgstr "パスワードの確認"
+
+msgid "Sell Product"
+msgstr "製品を売る"
+
+msgid "Price"
+msgstr "価格"
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Product Not Found"
+msgstr "製品が見つかりません"
+
+msgid "Summary"
+msgstr "概要"
+
+msgid "Your Products"
+msgstr "あなたの製品"
+
+msgid "Purchase Logs"
+msgstr "購入ログ"
+
+msgid "Upload Product"
+msgstr "製品をアップロードする"
+
+msgid "Wallet"
+msgstr "財布"
+
+msgid "Purchased Products"
+msgstr "購入した製品"

@@ -129,3 +129,36 @@ msgstr "Contraseña"
 
 msgid "Confirm Password"
 msgstr "Confirmar contraseña"
+
+msgid "Sell Product"
+msgstr "Vender Producto"
+
+msgid "Price"
+msgstr "Precio"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Product Not Found"
+msgstr "Producto No Encontrado"
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid "Your Products"
+msgstr "Tus Productos"
+
+msgid "Purchase Logs"
+msgstr "Registros de Compra"
+
+msgid "Upload Product"
+msgstr "Subir Producto"
+
+msgid "Wallet"
+msgstr "Cartera"
+
+msgid "Purchased Products"
+msgstr "Productos Comprados"
