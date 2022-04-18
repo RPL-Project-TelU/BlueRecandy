@@ -38,6 +38,8 @@
                 var user = await UserManager.GetUserAsync(User);
 
                 bool isSignedIn = SignInManager.IsSignedIn(User);
+                bool useExternalURL = Model.UseExternalURL;
+
                 if (!isSignedIn)
                 {
                     <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">Buy for $@Model.Price</a>
@@ -48,7 +50,15 @@
 
                     if (isOwner)
                     {
-                        <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
+                        if (!useExternalURL)
+                        {
+                            <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
+                        }
+                        else
+                        {
+                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                        }
+                        
                     }
                     else
                     {
@@ -61,7 +71,14 @@
                         }
                         else
                         {
-                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                            if (!useExternalURL)
+                            {
+                                <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
+                            }
+                            else
+                            {
+                                <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                            }
                         }
                     }
                 }

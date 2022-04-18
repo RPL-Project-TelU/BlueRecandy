@@ -28,6 +28,8 @@
                 
                 @Html.RadioButtonFor(model => model.UseExternalURL, false)
                 Source File
+                <br />
+                <span asp-validation-for="UseExternalURL" class="text-danger"></span>
             </div>
 
             <div class="form-group mt-4 mb-4">
@@ -58,7 +60,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="User" asp-action="">Back to Manage</a>
 </div>
 
 @section Scripts {
