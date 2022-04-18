@@ -8,7 +8,7 @@ msgid "fr"
 msgstr "French"
 
 msgid "id"
-msgstr "Indonesia"
+msgstr "Indonesian"
 
 msgid "ja"
 msgstr "Japan"

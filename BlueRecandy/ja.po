@@ -63,3 +63,117 @@ msgstr "インドネシア"
 
 msgid "ja"
 msgstr "日本"
+
+msgid "Search"
+msgstr "探す"
+
+msgid "Search the Products"
+msgstr "製品を検索する"
+
+msgid "Back to List"
+msgstr "リストに戻る"
+
+msgid "Create Feedback"
+msgstr "フィードバックの作成"
+
+msgid "Back to Product List"
+msgstr "製品リストに戻る"
+
+msgid "Back to Product"
+msgstr "製品に戻る"
+
+msgid "Delete"
+msgstr "削除"
+
+msgid "Are you sure you want to delete this?"
+msgstr "これを削除してもよろしいですか？"
+
+msgid "Product"
+msgstr "製品"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Description"
+msgstr "説明"
+
+msgid "Download URL"
+msgstr "ダウンロードURL"
+
+msgid "Owner"
+msgstr "所有者"
+
+msgid "Download"
+msgstr "ダウンロード"
+
+msgid "Give Feedback"
+msgstr "フィードバックを"
+
+msgid "FeedbackContent"
+msgstr "フィードバックコンテンツ"
+
+msgid "Rating"
+msgstr "評価"
+
+msgid "Create"
+msgstr "作成"
+
+msgid "Buy for"
+msgstr "買う"
+
+msgid "Email"
+msgstr "メール"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Confirm Password"
+msgstr "パスワードの確認"
+
+msgid "Sell Product"
+msgstr "製品を売る"
+
+msgid "Price"
+msgstr "価格"
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Product Not Found"
+msgstr "製品が見つかりません"
+
+msgid "Summary"
+msgstr "概要"
+
+msgid "Your Products"
+msgstr "あなたの製品"
+
+msgid "Purchase Logs"
+msgstr "購入ログ"
+
+msgid "Upload Product"
+msgstr "製品をアップロードする"
+
+msgid "Wallet"
+msgstr "財布"
+
+msgid "Purchased Products"
+msgstr "購入した製品"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "Feedback"
+msgstr "フィードバック"
+
+msgid "User"
+msgstr ユーザー"
+
+msgid "Index"
+msgstr "インデックス"
+
+msgid "Create New"
+msgstr "新規作成"

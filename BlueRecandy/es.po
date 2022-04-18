@@ -63,3 +63,117 @@ msgstr "Indonesia"
 
 msgid "ja"
 msgstr "Japón"
+
+msgid "Search"
+msgstr "Búscar"
+
+msgid "Search the Products"
+msgstr "Buscar los Productos"
+
+msgid "Back to List"
+msgstr "Volver a La Lista"
+
+msgid "Create Feedback"
+msgstr "Crear Comentarios"
+
+msgid "Back to Product List"
+msgstr "Volver a la lista de productos""
+
+msgid "Back to Product"
+msgstr "Volver al producto"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Estás seguro de que quieres eliminar esto?"
+
+msgid "Product"
+msgstr "Producto"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Download URL"
+msgstr "URL de descarga"
+
+msgid "Owner"
+msgstr "Propietario"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Give Feedback"
+msgstr "Dar comentarios"
+
+msgid "FeedbackContent"
+msgstr "Contenido de comentarios"
+
+msgid "Rating"
+msgstr "Calificación"
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Buy for"
+msgstr "Comprar"
+
+msgid "Email"
+msgstr "Correo electrónico"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Confirm Password"
+msgstr "Confirmar contraseña"
+
+msgid "Sell Product"
+msgstr "Vender Producto"
+
+msgid "Price"
+msgstr "Precio"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Product Not Found"
+msgstr "Producto No Encontrado"
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid "Your Products"
+msgstr "Tus Productos"
+
+msgid "Purchase Logs"
+msgstr "Registros de Compra"
+
+msgid "Upload Product"
+msgstr "Subir Producto"
+
+msgid "Wallet"
+msgstr "Cartera"
+
+msgid "Purchased Products"
+msgstr "Productos Comprados"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Feedback"
+msgstr "Comentarios"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Index"
+msgstr "Índice"
+
+msgid "Create New"
+msgstr "Crear Nuevo"

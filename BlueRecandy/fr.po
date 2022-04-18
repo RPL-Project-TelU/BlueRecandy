@@ -63,3 +63,117 @@ msgstr "Indonésie"
 
 msgid "ja"
 msgstr "Japon"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Search the Products"
+msgstr "Rechercher les Produits"
+
+msgid "Back to List"
+msgstr "Retour à la Liste"
+
+msgid "Create Feedback"
+msgstr "Créer un Commentaire"
+
+msgid "Back to Product List"
+msgstr "Retour à la Liste des Produits"
+
+msgid "Back to Product"
+msgstr "Retour au Produit"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Êtes-vous sûr de vouloir supprimer ceci ?"
+
+msgid "Product"
+msgstr "Produit"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Description"
+msgstr "La Description"
+
+msgid "Download URL"
+msgstr "URL de téléchargement"
+
+msgid "Owner"
+msgstr "Propriétaire"
+
+msgid "Download"
+msgstr "Télécharger"
+
+msgid "Give Feedback"
+msgstr "Donner commentaire"
+
+msgid "FeedbackContent"
+msgstr "Contenu des commentaires"
+
+msgid "Rating"
+msgstr "Note"
+
+msgid "Create"
+msgstr "Créer"
+
+msgid "Buy for"
+msgstr "Acheter"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
+
+msgid "Sell Product"
+msgstr "Vendre un Produit"
+
+msgid "Price"
+msgstr "Prix"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Product Not Found"
+msgstr "Produit Introuvable"
+
+msgid "Summary"
+msgstr "Résumé"
+
+msgid "Your Products"
+msgstr "Vos Produits"
+
+msgid "Purchase Logs"
+msgstr "Acheter des Journaux"
+
+msgid "Upload Product"
+msgstr "Télécharger le Produit"
+
+msgid "Wallet"
+msgstr "Porte Monnaie"
+
+msgid "Purchased Products"
+msgstr "Produits Achetés"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Feedback"
+msgstr "Commentaires"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "Index"
+msgstr "Indec"
+
+msgid "Create New"
+msgstr "Créer nouveau"

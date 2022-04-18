@@ -1,10 +1,11 @@
-﻿@model BlueRecandy.Models.Feedback
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BlueRecandy.Models.Feedback
+@inject IViewLocalizer T 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Feedback</h1>
+<h1>@T["Create Feedback"]</h1>
 
 <hr />
 <div class="row">
@@ -12,13 +13,13 @@
         <form asp-action="Create" asp-route-id="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FeedbackContent" class="control-label"></label>
+                <label asp-for="FeedbackContent" class="control-label">@T["FeedbackContent"]</label>
                 <textarea asp-for="FeedbackContent" class="form-control" ></textarea>
 
                 <span asp-validation-for="FeedbackContent" data-val class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
+                <label asp-for="Rating" class="control-label">@T["Rating"]</label>
                 <input asp-for="Rating" class="form-control" />
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
@@ -26,11 +27,11 @@
                 @{
                     if (ViewBag.ProductId == null)
                     {
-                        <input type="submit" value="Create" class="btn btn-primary" disabled/>
+                        <input type="submit" value=@T["Create"] class="btn btn-primary" disabled/>
                     }
                     else
                     {
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value=@T["Create"] class="btn btn-primary" />
                     }
                 }
             </div>
@@ -42,11 +43,11 @@
     @{
         if (ViewBag.ProductId == null)
         {
-            <a asp-controller="Products" asp-action="Index">Back to Product List</a>
+            <a asp-controller="Products" asp-action="Index">@T["Back to Product List"]</a>
         }
         else
         {
-            <a asp-controller="Products" asp-action="Details" asp-route-id="@ViewBag.ProductId">Back to Product</a>
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@ViewBag.ProductId">@T["Back to Product"]</a>
         }
     }
     
