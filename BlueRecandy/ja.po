@@ -120,3 +120,12 @@ msgstr "作成"
 
 msgid "Buy for"
 msgstr "買う"
+
+msgid "Email"
+msgstr "メール"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Confirm Password"
+msgstr "パスワードの確認"

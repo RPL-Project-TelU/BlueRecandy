@@ -121,12 +121,15 @@ msgstr "Buat"
 msgid "Buy for"
 msgstr "Beli"
 
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
+msgid "Email"
+msgstr "Surel"
+
+msgid "Password"
+msgstr "Kata sandi"
+
+msgid "Confirm Password"
+msgstr "Konfirmasi Kata sandi"
+
 msgid ""
 msgstr ""
 msgid ""

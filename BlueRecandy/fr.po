@@ -120,3 +120,12 @@ msgstr "Créer"
 
 msgid "Buy for"
 msgstr "Acheter"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
