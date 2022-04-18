@@ -107,7 +107,7 @@ namespace BlueRecandy.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(IFormFile sourceFile, [Bind("Id,Name,Description,DownloadURL,Price")] Product product)
+		public async Task<IActionResult> Create(IFormFile sourceFile, [Bind("Id,Name,Description,UseExternalURL,DownloadURL,Price")] Product product)
 		{
 			if (sourceFile != null)
 			{

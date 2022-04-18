@@ -12,14 +12,15 @@ namespace BlueRecandy.Models
 		public string? Description { get; set; }
 
 		[Required]
+		[Display(Name = "Use External URL")]
 		public bool UseExternalURL { get; set; }
 
 		[Display(Name = "Download URL")]
 		public string? DownloadURL { get; set; }
 
-		public string SourceFileName { get; set; }
+		public string? SourceFileName { get; set; }
 		public byte[]? SourceFileContents{ get; set; }
-		public string SourceFileContentType { get; set; }
+		public string? SourceFileContentType { get; set; }
 
 
 		[Required]
