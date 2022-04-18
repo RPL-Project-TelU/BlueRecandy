@@ -1,0 +1,179 @@
+﻿msgid "Welcome"
+msgstr "Bienvenido"
+
+msgid "Home"
+msgstr "Casa"
+
+msgid "Products"
+msgstr "Productos"
+
+msgid "Manage"
+msgstr "Gestionar"
+
+msgid "Register"
+msgstr "Registro"
+
+msgid "Login"
+msgstr "Acceso"
+
+msgid "Log in"
+msgstr "Acceso"
+
+msgid "Use a local account to log in."
+msgstr "Utilice una cuenta local para iniciar sesión."
+
+msgid "Remember Me?"
+msgstr "Recuérdame?"
+
+msgid "Forgot your password?"
+msgstr "Olvidaste tu contraseña?"
+
+msgid "Register as a new user"
+msgstr "Registrarse como nuevo usuario"
+
+msgid "Resend email confirmation"
+msgstr "Reenviar correo electrónico de confirmación"
+
+msgid "Create a new account."
+msgstr "Crea una cuenta nueva."
+
+msgid "Free"
+msgstr "LGraties"
+
+msgid "Show"
+msgstr "Espectáculo"
+
+msgid "Hello"
+msgstr "Hola"
+
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgid "en"
+msgstr "Inglés"
+
+msgid "es"
+msgstr "Español"
+
+msgid "fr"
+msgstr "Francés"
+
+msgid "id"
+msgstr "Indonesia"
+
+msgid "ja"
+msgstr "Japón"
+
+msgid "Search"
+msgstr "Búscar"
+
+msgid "Search the Products"
+msgstr "Buscar los Productos"
+
+msgid "Back to List"
+msgstr "Volver a La Lista"
+
+msgid "Create Feedback"
+msgstr "Crear Comentarios"
+
+msgid "Back to Product List"
+msgstr "Volver a la lista de productos""
+
+msgid "Back to Product"
+msgstr "Volver al producto"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Estás seguro de que quieres eliminar esto?"
+
+msgid "Product"
+msgstr "Producto"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Download URL"
+msgstr "URL de descarga"
+
+msgid "Owner"
+msgstr "Propietario"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Give Feedback"
+msgstr "Dar comentarios"
+
+msgid "FeedbackContent"
+msgstr "Contenido de comentarios"
+
+msgid "Rating"
+msgstr "Calificación"
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Buy for"
+msgstr "Comprar"
+
+msgid "Email"
+msgstr "Correo electrónico"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Confirm Password"
+msgstr "Confirmar contraseña"
+
+msgid "Sell Product"
+msgstr "Vender Producto"
+
+msgid "Price"
+msgstr "Precio"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Product Not Found"
+msgstr "Producto No Encontrado"
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid "Your Products"
+msgstr "Tus Productos"
+
+msgid "Purchase Logs"
+msgstr "Registros de Compra"
+
+msgid "Upload Product"
+msgstr "Subir Producto"
+
+msgid "Wallet"
+msgstr "Cartera"
+
+msgid "Purchased Products"
+msgstr "Productos Comprados"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Feedback"
+msgstr "Comentarios"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Index"
+msgstr "Índice"
+
+msgid "Create New"
+msgstr "Crear Nuevo"

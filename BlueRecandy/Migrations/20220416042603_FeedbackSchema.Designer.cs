@@ -4,6 +4,7 @@ using BlueRecandy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlueRecandy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220416042603_FeedbackSchema")]
+    partial class FeedbackSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -137,6 +139,7 @@ namespace BlueRecandy.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DownloadURL")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -149,18 +152,6 @@ namespace BlueRecandy.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<string>("SourceFileContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("SourceFileContents")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("SourceFileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("UseExternalURL")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -343,7 +334,7 @@ namespace BlueRecandy.Migrations
             modelBuilder.Entity("BlueRecandy.Models.Product", b =>
                 {
                     b.HasOne("BlueRecandy.Models.ApplicationUser", "Owner")
-                        .WithMany()
+                        .WithMany("OwnedProducts")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -423,6 +414,8 @@ namespace BlueRecandy.Migrations
 
             modelBuilder.Entity("BlueRecandy.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("OwnedProducts");
+
                     b.Navigation("PurchaseLogs");
                 });
 

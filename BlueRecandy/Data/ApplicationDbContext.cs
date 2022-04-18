@@ -22,11 +22,14 @@ namespace BlueRecandy.Data
 
 			builder.Entity<PurchaseLog>().HasOne(e => e.Product).WithMany(e => e.PurchaseLogs).HasForeignKey(e => e.ProductId).OnDelete(DeleteBehavior.NoAction);
 			builder.Entity<PurchaseLog>().HasOne(e => e.User).WithMany(e => e.PurchaseLogs).HasForeignKey(e => e.UserId);
+
+			builder.Entity<Feedback>().HasOne(e => e.Product).WithMany(e => e.ProductFeedbacks).HasForeignKey(e => e.ProductId).OnDelete(DeleteBehavior.NoAction);
 			
 			base.OnModelCreating(builder);
 		}
 
 		public DbSet<Product> Products { get; set; }
 		public DbSet<PurchaseLog> PurchaseLogs { get; set; }
+		public DbSet<Feedback> Feedbacks { get; set; }
 	}
 }

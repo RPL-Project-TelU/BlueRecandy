@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Web
+@using Microsoft.AspNetCore.Mvc.Localization
 
 @model BlueRecandy.Models.Product
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
+@inject IViewLocalizer T
 
 @{
     ViewData["Title"] = @Model.Name;
@@ -18,18 +20,18 @@
             @{
                 if (paymentSuccess)
                 {
-                    <p class="text-center text-success">Product @Model.Name has been purchased!</p>
+                    <p class="text-center text-success">@T["Product"] @Model.Name has been purchased!</p>
                 }
                 else
                 {
-                    <p class="text-center text-danger">Product @Model.Name failed to purchase!</p>
+                    <p class="text-center text-danger">@T["Product"] @Model.Name failed to purchase!</p>
                 }
             }
             </div>
         }
     }
     <div class="row">
-        <div class="col-6 border-bottom">
+        <div class="col-9 border-bottom">
             <h5>@Model.Name</h5>
             <p>by @Model.Owner.UserName</p>
         </div>
@@ -42,7 +44,7 @@
 
                 if (!isSignedIn)
                 {
-                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">Buy for $@Model.Price</a>
+                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
                 }
                 else
                 {
@@ -50,13 +52,14 @@
 
                     if (isOwner)
                     {
+
                         if (!useExternalURL)
                         {
-                            <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
+                            <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">@T["Download"]</a>
                         }
                         else
                         {
-                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
                         }
                         
                     }
@@ -67,22 +70,22 @@
 
                         if (log == null)
                         {
-                            <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">Buy for $@Model.Price</a>
+                            <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
                         }
                         else
                         {
                             if (!useExternalURL)
                             {
-                                <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
+                                <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">@T["Download"]</a>
                             }
                             else
                             {
-                                <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                                <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
                             }
                         }
                     }
+                    <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
                 }
-                
             }
         </div>
     </div>

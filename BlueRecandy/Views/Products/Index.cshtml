@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BlueRecandy.Models.Product>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer T
+@model IEnumerable<BlueRecandy.Models.Product>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +12,7 @@
         @{
             if (ViewBag.SearchStatus == false)
             {
-                <p>Product Not Found</p>
+                <p>@T["Product Not Found"]</p>
             }
         }
         @foreach (var item in Model)
@@ -30,10 +32,10 @@
                         }
                         else
                         {
-                            <p class="float-start">Free</p>
+                            <p class="float-start">@T["Free"]</p>
                         }
                     }
-                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary float-end">Show</a>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary float-end">@T["Show"]</a>
                 </div>
             </div>
         }

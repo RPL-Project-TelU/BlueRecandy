@@ -1,0 +1,18 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
+}
+
+<div>
+    <form asp-action="CultureManagement" asp-controller="Home" method="post"> 
+        <select name="culture" asp-for="@culture.RequestCulture.UICulture.Name" asp-items="cultureList"
+        onchange="this.form.submit();"></select>
+    </form>
+</div>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

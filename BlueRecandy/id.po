@@ -1,0 +1,199 @@
+﻿msgid "Welcome"
+msgstr "Selamat Datang"
+
+msgid "Home"
+msgstr "Beranda"
+
+msgid "Products"
+msgstr "Produk"
+
+msgid "Manage"
+msgstr "Kelola"
+
+msgid "Register"
+msgstr "Daftar"
+
+msgid "Login"
+msgstr "Masuk"
+
+msgid "Log in"
+msgstr "Masuk"
+
+msgid "Use a local account to log in."
+msgstr "Masuk menggunakan lokal akun"
+
+msgid "Remember Me?"
+msgstr "Ingat Saya?"
+
+msgid "Forgot your password?"
+msgstr "Lupa kata sandi?"
+
+msgid "Register as a new user"
+msgstr "Daftar sebagai akun baru"
+
+msgid "Resend email confirmation"
+msgstr "Kirim email konfirmasi"
+
+msgid "Create a new account."
+msgstr "Buat akun baru"
+
+msgid "Free"
+msgstr "Gratis"
+
+msgid "Show"
+msgstr "Lihat"
+
+msgid "Hello"
+msgstr "Hallo"
+
+msgid "Logout"
+msgstr "Keluar"
+
+msgid "en"
+msgstr "Inggris"
+
+msgid "es"
+msgstr "Spanyol"
+
+msgid "fr"
+msgstr "Prancis"
+
+msgid "id"
+msgstr "Indonesia"
+
+msgid "ja"
+msgstr "Jepang"
+
+msgid "Search"
+msgstr "Cari"
+
+msgid "Search the Products"
+msgstr "Cari Produk"
+
+msgid "Back to List"
+msgstr "Kembali ke Daftar"
+
+msgid "Create Feedback"
+msgstr "Buat Umpan Balik"
+
+msgid "Back to Product List"
+msgstr "Kembali ke Daftar Produk"
+
+msgid "Back to Product"
+msgstr "Kembali ke Produk"
+
+msgid "Delete"
+msgstr "Hapus"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Apa kamu yakin ingin menghapus ini?"
+
+msgid "Product"
+msgstr "Produk"
+
+msgid "Name"
+msgstr "Nama"
+
+msgid "Description"
+msgstr "Deskripsi"
+
+msgid "Download URL"
+msgstr "Unduh URL"
+
+msgid "Owner"
+msgstr "Pemilik"
+
+msgid "Download"
+msgstr "Unduh"
+
+msgid "Give Feedback"
+msgstr "Beri Umpan Balik"
+
+msgid "FeedbackContent"
+msgstr "Konten Umpan Balik"
+
+msgid "Rating"
+msgstr "Peringkat"
+
+msgid "Create"
+msgstr "Buat"
+
+msgid "Buy for"
+msgstr "Beli"
+
+msgid "Email"
+msgstr "Surel"
+
+msgid "Password"
+msgstr "Kata sandi"
+
+msgid "Confirm Password"
+msgstr "Konfirmasi Kata sandi"
+
+msgid "Sell Product"
+msgstr "Jual Produk"
+
+msgid "Price"
+msgstr "Harga"
+
+msgid "Edit"
+msgstr "Sunting"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Product Not Found"
+msgstr "Produk Tidak Ditemukan"
+
+msgid "Summary"
+msgstr "Ringkasan"
+
+msgid "Your Products"
+msgstr "Produk Anda"
+
+msgid "Purchase Logs"
+msgstr "Log Pembelian"
+
+msgid "Upload Product"
+msgstr "Unggah Produk"
+
+msgid "Wallet"
+msgstr "Dompet"
+
+msgid "Purchased Products"
+msgstr "Produk yang Dibeli"
+
+msgid "Details"
+msgstr "Detail"
+
+msgid "Feedback"
+msgstr Umpan Balik"
+
+msgid "User"
+msgstr "Pengguna"
+
+msgid "Index"
+msgstr "Indeks"
+
+msgid "Create New"
+msgstr "Buat Baru"
+
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+msgid ""
+msgstr ""
+
