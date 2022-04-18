@@ -72,3 +72,51 @@ msgstr "Rechercher les Produits"
 
 msgid "Back to List"
 msgstr "Retour à la Liste"
+
+msgid "Create Feedback"
+msgstr "Créer un Commentaire"
+
+msgid "Back to Product List"
+msgstr "Retour à la Liste des Produits"
+
+msgid "Back to Product"
+msgstr "Retour au Produit"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Êtes-vous sûr de vouloir supprimer ceci ?"
+
+msgid "Product"
+msgstr "Produit"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Description"
+msgstr "La Description"
+
+msgid "Download URL"
+msgstr "URL de téléchargement"
+
+msgid "Owner"
+msgstr "Propriétaire"
+
+msgid "Download"
+msgstr "Télécharger"
+
+msgid "Give Feedback"
+msgstr "Donner commentaire"
+
+msgid "FeedbackContent"
+msgstr "Contenu des commentaires"
+
+msgid "Rating"
+msgstr "Note"
+
+msgid "Create"
+msgstr "Créer"
+
+msgid "Buy for"
+msgstr "Acheter"

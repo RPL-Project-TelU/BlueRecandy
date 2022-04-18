@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Web
+@using Microsoft.AspNetCore.Mvc.Localization
 
 @model BlueRecandy.Models.Product
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
+@inject IViewLocalizer T
 
 @{
     ViewData["Title"] = @Model.Name;
@@ -40,14 +42,14 @@
                 bool isSignedIn = SignInManager.IsSignedIn(User);
                 if (!isSignedIn)
                 {
-                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">Buy for $@Model.Price</a>
+                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
                 }
                 else
                 {
                     bool isOwner = Model.OwnerId == user.Id;
                     if (isOwner)
                     {
-                        <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                        <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
                     }
                     else
                     {
@@ -56,14 +58,14 @@
 
                         if (log == null)
                         {
-                            <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">Buy for $@Model.Price</a>
+                            <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
                         }
                         else
                         {
-                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
                         }
                     }
-                    <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">Give Feedback</a>
+                    <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
                 }
             }
         </div>

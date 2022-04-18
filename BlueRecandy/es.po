@@ -65,10 +65,58 @@ msgid "ja"
 msgstr "Japón"
 
 msgid "Search"
-msgstr "Búsqueda"
+msgstr "Búscar"
 
 msgid "Search the Products"
 msgstr "Buscar los Productos"
 
 msgid "Back to List"
-msgstr "Volver a la Lista"
+msgstr "Volver a La Lista"
+
+msgid "Create Feedback"
+msgstr "Crear Comentarios"
+
+msgid "Back to Product List"
+msgstr "Volver a la lista de productos""
+
+msgid "Back to Product"
+msgstr "Volver al producto"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Are you sure you want to delete this?"
+msgstr "Estás seguro de que quieres eliminar esto?"
+
+msgid "Product"
+msgstr "Producto"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Download URL"
+msgstr "URL de descarga"
+
+msgid "Owner"
+msgstr "Propietario"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Give Feedback"
+msgstr "Dar comentarios"
+
+msgid "FeedbackContent"
+msgstr "Contenido de comentarios"
+
+msgid "Rating"
+msgstr "Calificación"
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Buy for"
+msgstr "Comprar"
