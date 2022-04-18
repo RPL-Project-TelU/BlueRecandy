@@ -45,9 +45,10 @@
                 else
                 {
                     bool isOwner = Model.OwnerId == user.Id;
+
                     if (isOwner)
                     {
-                        <a href="@Model.DownloadURL" target="_space" class="btn btn-success">Download</a>
+                        <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">Download</a>
                     }
                     else
                     {

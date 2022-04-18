@@ -107,8 +107,24 @@ namespace BlueRecandy.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,DownloadURL,Price")] Product product)
+		public async Task<IActionResult> Create(IFormFile sourceFile, [Bind("Id,Name,Description,DownloadURL,Price")] Product product)
 		{
+			if (sourceFile != null)
+			{
+				using (Stream s = sourceFile.OpenReadStream())
+				{
+					using (BinaryReader br = new BinaryReader(s))
+					{
+						byte[] contents = br.ReadBytes((int)sourceFile.Length);
+
+						product.SourceFileName = sourceFile.FileName;
+						product.SourceFileContentType = sourceFile.ContentType;
+						product.SourceFileContents = contents;
+
+					}
+				}
+			}
+
 			product.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 			_context.Add(product);
 			await _context.SaveChangesAsync();
@@ -201,6 +217,24 @@ namespace BlueRecandy.Controllers
 		private bool ProductExists(int id)
 		{
 			return _context.Products.Any(e => e.Id == id);
+		}
+
+		public async Task<IActionResult> Download(int? id)
+		{
+
+			var product = await _context.Products.FirstAsync(x => x.Id == id);
+
+			if (product.SourceFileContents != null)
+			{
+				byte[] data = product.SourceFileContents;
+				string fileName = product.SourceFileName;
+				string contentType = product.SourceFileContentType;
+
+				return File(data, contentType, fileName);
+			}
+
+
+			return NotFound();
 		}
 
 	}
