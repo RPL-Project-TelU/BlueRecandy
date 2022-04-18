@@ -162,3 +162,18 @@ msgstr "Porte Monnaie"
 
 msgid "Purchased Products"
 msgstr "Produits Achetés"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Feedback"
+msgstr "Commentaires"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "Index"
+msgstr "Indec"
+
+msgid "Create New"
+msgstr "Créer nouveau"

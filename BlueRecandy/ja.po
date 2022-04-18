@@ -162,3 +162,18 @@ msgstr "財布"
 
 msgid "Purchased Products"
 msgstr "購入した製品"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "Feedback"
+msgstr "フィードバック"
+
+msgid "User"
+msgstr ユーザー"
+
+msgid "Index"
+msgstr "インデックス"
+
+msgid "Create New"
+msgstr "新規作成"

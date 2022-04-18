@@ -162,3 +162,18 @@ msgstr "Cartera"
 
 msgid "Purchased Products"
 msgstr "Productos Comprados"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Feedback"
+msgstr "Comentarios"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Index"
+msgstr "Índice"
+
+msgid "Create New"
+msgstr "Crear Nuevo"

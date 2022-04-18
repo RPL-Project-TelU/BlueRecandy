@@ -163,16 +163,21 @@ msgstr "Dompet"
 msgid "Purchased Products"
 msgstr "Produk yang Dibeli"
 
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
-msgid ""
-msgstr ""
+msgid "Details"
+msgstr "Detail"
+
+msgid "Feedback"
+msgstr Umpan Balik"
+
+msgid "User"
+msgstr "Pengguna"
+
+msgid "Index"
+msgstr "Indeks"
+
+msgid "Create New"
+msgstr "Buat Baru"
+
 msgid ""
 msgstr ""
 msgid ""
