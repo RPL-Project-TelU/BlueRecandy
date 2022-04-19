@@ -44,6 +44,7 @@
                 var user = await UserManager.GetUserAsync(User);
                 bool isOwner = isSignedIn && Model.OwnerId == user.Id;
                 bool isPurchased = isOwner || (isSignedIn && Model.PurchaseLogs.Find(x => x.UserId == user.Id) != null);
+                bool isAlreadyGiveFeedback = isSignedIn && Model.ProductFeedbacks.Find(x => x.UserId == user.Id) != null;
 
                 if (isOwner || isPurchased)
                 {
@@ -58,7 +59,15 @@
 
                     if (!isOwner)
                     {
-                        <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
+                        
+                        if (isAlreadyGiveFeedback)
+                        {
+                            <a asp-controller="Feedbacks" asp-action="Edit" asp-route-id="@Model.ProductFeedbacks.Find(x => x.UserId == user.Id).Id" class="btn btn-primary">@T["Give Feedback"]</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
+                        }
                     }
                 }
                 else
