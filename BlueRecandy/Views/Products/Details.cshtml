@@ -31,68 +31,76 @@
         }
     }
     <div class="row">
-        <div class="col-9 border-bottom">
+        <div class="col-9">
             <h5>@Model.Name</h5>
             <p>by @Model.Owner.UserName</p>
+            <p>Downloads: @Model.PurchaseLogs.Count()</p>
         </div>
         <div class="col-3">
             @{
-                var user = await UserManager.GetUserAsync(User);
-
                 bool isSignedIn = SignInManager.IsSignedIn(User);
                 bool useExternalURL = Model.UseExternalURL;
 
-                if (!isSignedIn)
-                {
-                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
-                }
-                else
-                {
-                    bool isOwner = Model.OwnerId == user.Id;
+                var user = await UserManager.GetUserAsync(User);
+                bool isOwner = isSignedIn && Model.OwnerId == user.Id;
+                bool isPurchased = isOwner || (isSignedIn && Model.PurchaseLogs.Find(x => x.UserId == user.Id) != null);
 
-                    if (isOwner)
+                if (isOwner || isPurchased)
+                {
+                    if (!useExternalURL)
                     {
-
-                        if (!useExternalURL)
-                        {
-                            <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">@T["Download"]</a>
-                        }
-                        else
-                        {
-                            <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
-                        }
-                        
+                        <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">@T["Download"]</a>
                     }
                     else
                     {
-                        var purchaseLogs = Model.PurchaseLogs;
-                        var log = purchaseLogs.Find(x => x.UserId == user.Id);
-
-                        if (log == null)
-                        {
-                            <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
-                        }
-                        else
-                        {
-                            if (!useExternalURL)
-                            {
-                                <a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-success">@T["Download"]</a>
-                            }
-                            else
-                            {
-                                <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
-                            }
-                        }
+                        <a href="@Model.DownloadURL" target="_space" class="btn btn-success">@T["Download"]</a>
                     }
-                    <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
+
+                    if (!isOwner)
+                    {
+                        <a asp-controller="Feedbacks" asp-action="Create" asp-route-productid="@Model.Id" class="btn btn-primary">@T["Give Feedback"]</a>
+                    }
+                }
+                else
+                {
+                    <a asp-controller="User" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-success">@T["Buy for"] $@Model.Price</a>
+                }
+
+            }
+        </div>
+        <hr />
+    </div>
+
+    <div class="mt-4 row">
+        <div class="col-6">
+            <p>@Model.Description</p>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-3 border-start">
+            <h6>Feedbacks</h6>
+            @{
+                foreach (var item in Model.ProductFeedbacks)
+                {
+                    <div class="card my-3">
+                        <div class="card-header">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div>
+                                    @{
+                                        var reviewer = await UserManager.FindByIdAsync(item.UserId);
+                                    }
+                                    @reviewer.UserName
+                                </div>
+                                <div>
+                                    @item.Rating / 5
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>@item.FeedbackContent</p>
+                        </div>
+                    </div>
                 }
             }
         </div>
-    </div>
-
-    <div class="mt-4">
-        <p>
-            @Model.Description
-        </p>
     </div>
 </div>

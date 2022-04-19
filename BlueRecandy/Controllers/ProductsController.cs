@@ -64,11 +64,14 @@ namespace BlueRecandy.Controllers
 			var product = await _context.Products
 				.Include(p => p.Owner)
 				.Include(p => p.PurchaseLogs)
+				.Include(p => p.ProductFeedbacks)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (product == null)
 			{
 				return NotFound();
 			}
+
+			
 
 			return View(product);
 		}
@@ -84,6 +87,7 @@ namespace BlueRecandy.Controllers
 			var product = await _context.Products
 				.Include(p => p.Owner)
 				.Include(p => p.PurchaseLogs)
+				.Include(p => p.ProductFeedbacks)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			ViewBag.PaymentSuccess = paymentSuccess;
 
