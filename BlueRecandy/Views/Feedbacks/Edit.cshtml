@@ -17,23 +17,13 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="FeedbackContent" class="control-label">@T["FeedbackContent"]</label>
-                <input asp-for="FeedbackContent" class="form-control" />
+                <textarea asp-for="FeedbackContent" class="form-control"></textarea>
                 <span asp-validation-for="FeedbackContent" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rating" class="control-label">@T["Rating"]</label>
                 <input asp-for="Rating" class="form-control" />
                 <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductId" class="control-label">@T["Product"]</label>
-                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
-                <span asp-validation-for="ProductId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label">@T["User"]</label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value=@T["Save"] class="btn btn-primary" />
