@@ -3,7 +3,7 @@
 Anggota:
 1. Ahmad Fathan Hanif (1302204090)
 2. Mohammad Lutfi (1302204066)
-3. Muhammad Iqbal Faturrohman
+3. Muhammad Iqbal Faturrohman (1302200016)
 4. Juanda Sinurat
 5. Bayu Evri Saputra
 6. Defrizal Cahyono Putro
