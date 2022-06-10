@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using BlueRecandy.Data;
 using BlueRecandy.Models;
+using BlueRecandy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,11 @@ namespace BlueRecandy.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IProductsService _service;
 
-        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProductsController(ApplicationDbContext context, IProductsService service, UserManager<ApplicationUser> userManager)
         {
+            _service = service;
             _context = context;
             _userManager = userManager;
         }
@@ -61,11 +64,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .Include(p => p.PurchaseLogs)
-                .Include(p => p.ProductFeedbacks)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _service.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -84,11 +83,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .Include(p => p.PurchaseLogs)
-                .Include(p => p.ProductFeedbacks)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _service.GetProductById(id);
             ViewBag.PaymentSuccess = paymentSuccess;
 
             if (product == null)
