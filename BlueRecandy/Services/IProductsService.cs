@@ -7,5 +7,6 @@ namespace BlueRecandy.Services
 
 		Task<Product?> GetProductById(int? id);
 
+		IQueryable<Product?> GetProductsIncludeOwner();
 	}
 }

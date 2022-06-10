@@ -29,7 +29,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
+            var applicationDbContext = _service.GetProductsIncludeOwner();
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ShowSearchForm()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
+            var applicationDbContext = _service.GetProductsIncludeOwner();
             return View();
         }
 
@@ -45,7 +45,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
+            var applicationDbContext = _service.GetProductsIncludeOwner();
             ViewBag.SearchStatus = true;
             if (SearchPhrase == null)
             {

@@ -8,7 +8,7 @@ namespace BlueRecandy.Services
 	{
 
 		private readonly ApplicationDbContext _context;
-
+	
 		public ProductsService(ApplicationDbContext context)
 		{
 			_context = context;
@@ -24,5 +24,12 @@ namespace BlueRecandy.Services
 
 			return product;
 		}
-	}
+
+        public IQueryable<Product?> GetProductsIncludeOwner()
+        {
+			var applicationDbContext = _context.Products.Include(p => p.Owner);
+
+			return applicationDbContext;
+		}
+    }
 }
