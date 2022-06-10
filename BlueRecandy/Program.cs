@@ -18,6 +18,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Service
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IFeedbacksService, FeedbacksService>();   /******* HERE ********/
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
 	.AddEntityFrameworkStores<ApplicationDbContext>();
