@@ -10,6 +10,7 @@ using BlueRecandy.Data;
 using BlueRecandy.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using BlueRecandy.Services;
 
 namespace BlueRecandy.Controllers
 {
@@ -18,9 +19,11 @@ namespace BlueRecandy.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IFeedbacksService _service;         /******* HERE ********/
 
-        public FeedbacksController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public FeedbacksController(ApplicationDbContext context, IFeedbacksService service, UserManager<ApplicationUser> userManager)
         {
+            _service = service;             /******* HERE ********/
             _userManager = userManager;
             _context = context;
         }
@@ -40,10 +43,8 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var feedback = await _context.Feedbacks
-                .Include(f => f.Product)
-                .Include(f => f.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var feedback = await _service.GetFeedbacksById(id);                 /******* HERE ********/
+
             if (feedback == null)
             {
                 return NotFound();
@@ -144,10 +145,8 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var feedback = await _context.Feedbacks
-                .Include(f => f.Product)
-                .Include(f => f.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var feedback = await _service.GetFeedbacksById(id);                 /******* HERE ********/
+
             if (feedback == null)
             {
                 return NotFound();
