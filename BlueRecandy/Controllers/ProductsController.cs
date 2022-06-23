@@ -1,6 +1,7 @@
 ﻿#nullable disable
 using BlueRecandy.Data;
 using BlueRecandy.Models;
+using BlueRecandy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,11 @@ namespace BlueRecandy.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IProductsService _productsService;
 
-        public ProductsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProductsController(ApplicationDbContext context, IProductsService service, UserManager<ApplicationUser> userManager)
         {
+            _productsService = service;
             _context = context;
             _userManager = userManager;
         }
@@ -26,15 +29,14 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
+            var applicationDbContext = _productsService.GetProductsIncludeOwner();
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/ShowSearchForm
         [AllowAnonymous]
-        public async Task<IActionResult> ShowSearchForm()
+        public IActionResult ShowSearchForm()
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
             return View();
         }
 
@@ -42,7 +44,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            var applicationDbContext = _context.Products.Include(p => p.Owner);
+            var applicationDbContext = _productsService.GetProductsIncludeOwner();
             ViewBag.SearchStatus = true;
             if (SearchPhrase == null)
             {
@@ -61,17 +63,11 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .Include(p => p.PurchaseLogs)
-                .Include(p => p.ProductFeedbacks)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
             }
-
-
 
             return View(product);
         }
@@ -84,11 +80,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .Include(p => p.PurchaseLogs)
-                .Include(p => p.ProductFeedbacks)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _productsService.GetProductById(id);
             ViewBag.PaymentSuccess = paymentSuccess;
 
             if (product == null)
@@ -143,7 +135,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -215,9 +207,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -231,7 +221,7 @@ namespace BlueRecandy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productsService.GetProductById(id);
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -239,7 +229,7 @@ namespace BlueRecandy.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _productsService.IsProductExists(id);
         }
 
         public async Task<IActionResult> Download(int? id)

@@ -1,19 +1,20 @@
 ﻿using BlueRecandy.Data;
 using BlueRecandy.Models;
+using BlueRecandy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace BlueRecandy.Controllers
 {
 	[Authorize]
 	public class UserController : Controller
 	{
-
+		private readonly IUsersService _usersService;
+		private readonly IProductsService _productsService;
 		private readonly ApplicationDbContext _context;
-		private readonly UserManager<ApplicationUser> _userManager;
+		private readonly IPurchaseLogsService _purchaseLogsService;
 
 		public enum ManagementPage
         {
@@ -22,49 +23,49 @@ namespace BlueRecandy.Controllers
 			PurchaseLogs
         }
 
-		public UserController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+		public UserController(IUsersService usersService, IProductsService productsService, IPurchaseLogsService purchaseLogsService, ApplicationDbContext context)
 		{
+			_usersService = usersService;
+			_productsService = productsService;
+			_purchaseLogsService = purchaseLogsService;
 			_context = context;
-			_userManager = userManager;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var user = await _userManager.GetUserAsync(User);
-			var products = _context.Products.AsEnumerable();
-			var logs = _context.PurchaseLogs.Include(l => l.User).AsEnumerable();
-
-			var ownedProducts = products.Where(x => x.OwnerId == user.Id);
-			var purchaseLogs = logs.Where(x => x.User.Id == user.Id);
+			var user = await _usersService.GetUserByClaims(User);
+			var products = _productsService.GetProductsByOwner(user.Id);
+			var logs = _purchaseLogsService.GetPurchaseLogsByUserId(user.Id);
 
 			ViewBag.User = user;
-			ViewBag.PurchaseLogs = purchaseLogs;
-			ViewBag.Products = ownedProducts;
+			ViewBag.PurchaseLogs = logs;
+			ViewBag.Products = products;
 
 			ViewBag.ManagementPage = ManagementPage.Summary;
-			return View(ownedProducts);
+			return View(products);
 		}
 
 		public async Task<IActionResult> ManageYourProducts()
         {
-			var user = await _userManager.GetUserAsync(User);
-			var products = _context.Products.AsEnumerable();
+			var user = await _usersService.GetUserByClaims(User);
+			var products = _productsService.GetProductsByOwner(user.Id);
 
 			ViewBag.User = user;
-			ViewBag.Products = products.Where(x => x.OwnerId == user.Id);
+			ViewBag.Products = products;
 			ViewBag.ManagementPage = ManagementPage.YourProducts;
+
 			return View(viewName: "Index", user);
         }
 
 		public async Task<IActionResult> ManagePurchaseLogs()
         {
-			var user = await _userManager.GetUserAsync(User);
-			var logs = _context.PurchaseLogs.Include(l => l.Product).Include(l => l.User).AsEnumerable();
+			var user = await _usersService.GetUserByClaims(User);
+			var logs = _purchaseLogsService.GetPurchaseLogsByUserId(user.Id);
 
 			ViewBag.User = user;
-			ViewBag.PurchaseLogs = logs.Where(x => x.UserId == user.Id);
-
+			ViewBag.PurchaseLogs = logs;
 			ViewBag.ManagementPage = ManagementPage.PurchaseLogs;
+
 			return View(viewName: "Index", user);
 		}
 
@@ -75,8 +76,8 @@ namespace BlueRecandy.Controllers
 				return NotFound();
 			}
 
-			var product = await _context.Products.Include(p => p.PurchaseLogs).FirstAsync(p => p.Id == id);
-			var user = await _userManager.GetUserAsync(User);
+			var product = await _productsService.GetProductById(id);
+			var user = await _usersService.GetUserByClaims(User);
 
 			PurchaseLog? purchaseLog;
 
