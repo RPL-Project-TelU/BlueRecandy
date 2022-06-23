@@ -35,9 +35,8 @@ namespace BlueRecandy.Controllers
 
         // GET: Products/ShowSearchForm
         [AllowAnonymous]
-        public async Task<IActionResult> ShowSearchForm()
+        public IActionResult ShowSearchForm()
         {
-            var applicationDbContext = _service.GetProductsIncludeOwner();
             return View();
         }
 
@@ -69,8 +68,6 @@ namespace BlueRecandy.Controllers
             {
                 return NotFound();
             }
-
-
 
             return View(product);
         }
