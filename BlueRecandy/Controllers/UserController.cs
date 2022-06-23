@@ -14,7 +14,6 @@ namespace BlueRecandy.Controllers
 		private readonly IUsersService _usersService;
 		private readonly IProductsService _productsService;
 		private readonly ApplicationDbContext _context;
-		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IPurchaseLogsService _purchaseLogsService;
 
 		public enum ManagementPage
@@ -24,13 +23,12 @@ namespace BlueRecandy.Controllers
 			PurchaseLogs
         }
 
-		public UserController(IUsersService usersService, IProductsService productsService, IPurchaseLogsService purchaseLogsService, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+		public UserController(IUsersService usersService, IProductsService productsService, IPurchaseLogsService purchaseLogsService, ApplicationDbContext context)
 		{
 			_usersService = usersService;
 			_productsService = productsService;
 			_purchaseLogsService = purchaseLogsService;
 			_context = context;
-			_userManager = userManager;
 		}
 
 		public async Task<IActionResult> Index()
@@ -78,7 +76,7 @@ namespace BlueRecandy.Controllers
 				return NotFound();
 			}
 
-			var product = await _context.Products.Include(p => p.PurchaseLogs).FirstAsync(p => p.Id == id);
+			var product = await _productsService.GetProductById(id);
 			var user = await _usersService.GetUserByClaims(User);
 
 			PurchaseLog? purchaseLog;

@@ -14,13 +14,13 @@ namespace BlueRecandy.Services
 			_context = context;
 		}
 
-		public async Task<Product?> GetProductById(int? id)
+		public async Task<Product> GetProductById(int? id)
 		{
 			var product = await _context.Products
 				.Include(p => p.Owner)
 				.Include(p => p.PurchaseLogs)
 				.Include(p => p.ProductFeedbacks)
-				.FirstOrDefaultAsync(m => m.Id == id);
+				.FirstAsync(m => m.Id == id);
 
 			return product;
 		}
@@ -33,15 +33,14 @@ namespace BlueRecandy.Services
 				.Include(p => p.ProductFeedbacks)
 				.AsEnumerable();
 
-			var filterResult = products.Where(p => p.OwnerId == ownerId);
-			return filterResult;
+			return products.Where(p => p.OwnerId == ownerId);
 		}
 
 		public IQueryable<Product?> GetProductsIncludeOwner()
         {
-			var applicationDbContext = _context.Products.Include(p => p.Owner);
+			var queryProducts = _context.Products.Include(p => p.Owner);
 
-			return applicationDbContext;
+			return queryProducts;
 		}
     }
 }
