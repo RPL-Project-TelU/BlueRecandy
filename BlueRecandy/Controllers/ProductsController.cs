@@ -16,11 +16,11 @@ namespace BlueRecandy.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IProductsService _service;
+        private readonly IProductsService _productsService;
 
         public ProductsController(ApplicationDbContext context, IProductsService service, UserManager<ApplicationUser> userManager)
         {
-            _service = service;
+            _productsService = service;
             _context = context;
             _userManager = userManager;
         }
@@ -29,7 +29,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _service.GetProductsIncludeOwner();
+            var applicationDbContext = _productsService.GetProductsIncludeOwner();
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -44,7 +44,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            var applicationDbContext = _service.GetProductsIncludeOwner();
+            var applicationDbContext = _productsService.GetProductsIncludeOwner();
             ViewBag.SearchStatus = true;
             if (SearchPhrase == null)
             {
@@ -63,7 +63,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _service.GetProductById(id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _service.GetProductById(id);
+            var product = await _productsService.GetProductById(id);
             ViewBag.PaymentSuccess = paymentSuccess;
 
             if (product == null)
@@ -135,7 +135,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -207,9 +207,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Owner)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _productsService.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -223,7 +221,7 @@ namespace BlueRecandy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productsService.GetProductById(id);
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -231,7 +229,7 @@ namespace BlueRecandy.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _productsService.IsProductExists(id);
         }
 
         public async Task<IActionResult> Download(int? id)

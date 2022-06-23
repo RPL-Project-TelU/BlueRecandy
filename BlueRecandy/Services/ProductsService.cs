@@ -42,5 +42,10 @@ namespace BlueRecandy.Services
 
 			return queryProducts;
 		}
-    }
+
+		public bool IsProductExists(int id)
+		{
+			return _context.Products.Any(p => p.Id == id);
+		}
+	}
 }
