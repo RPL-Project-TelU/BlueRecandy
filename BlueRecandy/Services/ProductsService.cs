@@ -25,7 +25,19 @@ namespace BlueRecandy.Services
 			return product;
 		}
 
-        public IQueryable<Product?> GetProductsIncludeOwner()
+		public IEnumerable<Product> GetProductsByOwner(string ownerId)
+		{
+			var products = _context.Products
+				.Include(p => p.Owner)
+				.Include(p => p.PurchaseLogs)
+				.Include(p => p.ProductFeedbacks)
+				.AsEnumerable();
+
+			var filterResult = products.Where(p => p.OwnerId == ownerId);
+			return filterResult;
+		}
+
+		public IQueryable<Product?> GetProductsIncludeOwner()
         {
 			var applicationDbContext = _context.Products.Include(p => p.Owner);
 
