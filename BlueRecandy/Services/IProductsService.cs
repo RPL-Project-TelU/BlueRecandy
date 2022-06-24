@@ -7,7 +7,7 @@ namespace BlueRecandy.Services
 
 		bool IsProductExists(int id);
 
-		Task<Product> GetProductById(int? id);
+		Task<Product?> GetProductById(int? id);
 
 		IQueryable<Product?> GetProductsIncludeOwner();
 

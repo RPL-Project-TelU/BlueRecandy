@@ -20,9 +20,10 @@ namespace BlueRecandy.UnitTest
 			mockService.Setup(m => m.GetProductById(1)).ReturnsAsync(product);
 			var service = mockService.Object;
 
-			var found = service.GetProductById(product.Id);
+			var actionResult = service.GetProductById(product.Id);
+			var result = actionResult.Result;
 
-			Assert.NotNull(found);
+			Assert.NotNull(result);
 		}
 
 		[Fact]
@@ -35,9 +36,10 @@ namespace BlueRecandy.UnitTest
 			mockService.Setup(m => m.GetProductById(1)).ReturnsAsync(product);
 			var service = mockService.Object;
 
-			var found = service.GetProductById(null);
+			var actionResult = service.GetProductById(null);
+			var result = actionResult.Result;
 
-			Assert.Null(found);
+			Assert.Null(result);
 		}
 	}
 }

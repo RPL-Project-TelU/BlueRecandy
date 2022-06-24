@@ -14,8 +14,10 @@ namespace BlueRecandy.Services
 			_context = context;
 		}
 
-		public async Task<Product> GetProductById(int? id)
+		public async Task<Product?> GetProductById(int? id)
 		{
+			if (id == null) return null;
+
 			var product = await _context.Products
 				.Include(p => p.Owner)
 				.Include(p => p.PurchaseLogs)
