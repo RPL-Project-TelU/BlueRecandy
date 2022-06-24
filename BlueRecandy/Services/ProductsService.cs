@@ -27,8 +27,10 @@ namespace BlueRecandy.Services
 			return product;
 		}
 
-		public IEnumerable<Product> GetProductsByOwner(string ownerId)
+		public IEnumerable<Product> GetProductsByOwner(string? ownerId)
 		{
+			if (ownerId == null) return Enumerable.Empty<Product>();
+
 			var products = _context.Products
 				.Include(p => p.Owner)
 				.Include(p => p.PurchaseLogs)
