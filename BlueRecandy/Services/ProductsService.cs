@@ -14,10 +14,10 @@ namespace BlueRecandy.Services
 			_context = context;
 		}
 
-		public async void AddProduct(Product product)
+		public async Task<int> AddProduct(Product product)
 		{
 			_context.Products.Add(product);
-			await _context.SaveChangesAsync();
+			return await _context.SaveChangesAsync();
 		}
 
 		public bool ValidateProduct(Product product)
@@ -76,16 +76,16 @@ namespace BlueRecandy.Services
 			return _context.Products.Any(p => p.Id == id);
 		}
 
-		public async void UpdateProduct(Product product)
+		public async Task<int> UpdateProduct(Product product)
 		{
 			_context.Update(product);
-			await _context.SaveChangesAsync();
+			return await _context.SaveChangesAsync();
 		}
 
-		public async void DeleteProduct(Product product)
+		public async Task<int> DeleteProduct(Product product)
 		{
 			_context.Remove(product);
-			await _context.SaveChangesAsync();
+			return await _context.SaveChangesAsync();
 		}
 	}
 }

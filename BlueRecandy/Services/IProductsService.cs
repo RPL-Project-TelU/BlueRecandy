@@ -15,10 +15,10 @@ namespace BlueRecandy.Services
 
 		bool ValidateProduct(Product product);
 
-		void AddProduct(Product product);
+		Task<int> AddProduct(Product product);
 
-		void UpdateProduct(Product product);
+		Task<int> UpdateProduct(Product product);
 
-		void DeleteProduct(Product product);
+		Task<int> DeleteProduct(Product product);
 	}
 }
