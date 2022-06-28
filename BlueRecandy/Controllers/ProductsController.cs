@@ -183,7 +183,10 @@ namespace BlueRecandy.Controllers
 
             try
             {
-                _productsService.UpdateProduct(product);
+                if (_productsService.ValidateProduct(product))
+                {
+                    await _productsService.UpdateProduct(product);
+				}
             }
             catch (DbUpdateConcurrencyException)
             {
