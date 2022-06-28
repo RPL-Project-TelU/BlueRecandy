@@ -4,6 +4,10 @@ using BlueRecandy.Services;
 using BlueRecandy.Models;
 using System.Collections.Generic;
 using System.Linq;
+using BlueRecandy.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Security.Claims;
 
 namespace BlueRecandy.UnitTest
 {
@@ -155,6 +159,43 @@ namespace BlueRecandy.UnitTest
 
 			// Assert
 			Assert.False(result);
+		}
+
+		[Fact]
+		public void GetProductsIncludeOwner_NoProducts_EmptyQuery()
+		{
+			// Arrange
+			var mockService = new Mock<IProductsService>();
+			var emptyEnum = Enumerable.Empty<Product>();
+			mockService.Setup(m => m.GetProductsIncludeOwner()).Returns(emptyEnum.AsQueryable());
+			var service = mockService.Object;
+
+			// Act
+			var actionResult = service.GetProductsIncludeOwner();
+
+			// Assert
+			Assert.Equal(Enumerable.Empty<Product>(), actionResult);
+		}
+
+		[Fact]
+		public void GetProductsIncludeOwner_HasProducts_HasQuery()
+		{
+			// Arrange
+			var mockService = new Mock<IProductsService>();
+			var product = new Product();
+			product.Id = It.IsAny<int>();
+			product.Name = It.IsAny<string>();
+
+			var products = new List<Product>() { product };
+			
+			mockService.Setup(m => m.GetProductsIncludeOwner()).Returns(products.AsQueryable());
+			var service = mockService.Object;
+
+			// Act
+			var actionResult = service.GetProductsIncludeOwner();
+
+			// Assert
+			Assert.True(actionResult.Count() > 0);
 		}
 	}
 }
