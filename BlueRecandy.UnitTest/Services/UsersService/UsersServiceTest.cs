@@ -43,8 +43,8 @@ namespace BlueRecandy.UnitTest.Services.UsersService
         [Fact]
         public void GetUserByClaims_ClaimsIsNull_UserIsNull()
         {
+            // Arrange
             var mockService = new Mock<IUsersService>();
-
             var user = new ApplicationUser();
             user.Id = "1";
             user.Email = null;
@@ -64,6 +64,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
         [Fact]
         public void GetUserByEmail_EmailNotNull_UserIsNotNull()
         {
+            // Arrange
             var mockService = new Mock<IUsersService>();
             var user = new ApplicationUser();
             user.Id = "1";
@@ -79,6 +80,27 @@ namespace BlueRecandy.UnitTest.Services.UsersService
 
             // Assert 
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void GetUserByEmail_EmailIsNull_UserIsNull()
+        {
+            // Arrange
+            var mockService = new Mock<IUsersService>();
+            var user = new ApplicationUser();
+            user.Id = "1";
+            user.Email = null;
+            user.FullName = null;
+
+            mockService.Setup(m => m.GetUserByEmail("alexvenderjoz@gmail.com")).ReturnsAsync(user);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserByEmail(null);
+            var result = actionResult.Result;
+
+            // Assert 
+            Assert.Null(result);
         }
     }
 }
