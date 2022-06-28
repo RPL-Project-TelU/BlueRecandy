@@ -12,5 +12,13 @@ namespace BlueRecandy.Services
 		IQueryable<Product?> GetProductsIncludeOwner();
 
 		IEnumerable<Product> GetProductsByOwner(string? ownerId);
+
+		bool ValidateProduct(Product product);
+
+		void AddProduct(Product product);
+
+		void UpdateProduct(Product product);
+
+		void DeleteProduct(Product product);
 	}
 }

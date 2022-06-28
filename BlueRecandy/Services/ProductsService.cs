@@ -14,6 +14,18 @@ namespace BlueRecandy.Services
 			_context = context;
 		}
 
+		public async void AddProduct(Product product)
+		{
+			_context.Products.Add(product);
+			await _context.SaveChangesAsync();
+		}
+
+		public bool ValidateProduct(Product product)
+		{
+			bool externalUrlCheck = product.UseExternalURL ? product.DownloadURL != null : product.SourceFileContents != null;
+			return product.Name != null && product.OwnerId != null && product.Price >= 0 && externalUrlCheck;
+		}
+
 		public async Task<Product?> GetProductById(int? id)
 		{
 			if (id == null) return null;
@@ -50,6 +62,18 @@ namespace BlueRecandy.Services
 		public bool IsProductExists(int id)
 		{
 			return _context.Products.Any(p => p.Id == id);
+		}
+
+		public async void UpdateProduct(Product product)
+		{
+			_context.Update(product);
+			await _context.SaveChangesAsync();
+		}
+
+		public async void DeleteProduct(Product product)
+		{
+			_context.Remove(product);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

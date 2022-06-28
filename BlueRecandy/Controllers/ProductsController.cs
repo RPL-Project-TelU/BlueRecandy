@@ -14,15 +14,13 @@ namespace BlueRecandy.Controllers
     [Authorize]
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IProductsService _productsService;
+        private readonly IUsersService _usersService;
 
-        public ProductsController(ApplicationDbContext context, IProductsService service, UserManager<ApplicationUser> userManager)
+        public ProductsController(IProductsService service, IUsersService usersService)
         {
             _productsService = service;
-            _context = context;
-            _userManager = userManager;
+            _usersService = usersService;
         }
 
         // GET: Products
@@ -42,15 +40,15 @@ namespace BlueRecandy.Controllers
 
         // PoST: Products/ShowSearchResults
         [AllowAnonymous]
-        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
         {
-            var applicationDbContext = _productsService.GetProductsIncludeOwner();
+            var products = _productsService.GetProductsIncludeOwner();
             ViewBag.SearchStatus = true;
             if (SearchPhrase == null)
             {
                 ViewBag.SearchStatus = false;
             }
-            return View("Index", await _context.Products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains
+            return View("Index", await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains
             (SearchPhrase)).ToListAsync());
         }
 
@@ -94,7 +92,6 @@ namespace BlueRecandy.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["OwnerId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -121,9 +118,13 @@ namespace BlueRecandy.Controllers
                 }
             }
 
-            product.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _context.Add(product);
-            await _context.SaveChangesAsync();
+            var owner = await _usersService.GetUserByClaims(User);
+            product.OwnerId = owner.Id;
+
+            if (_productsService.ValidateProduct(product)) {
+                _productsService.AddProduct(product);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -182,8 +183,7 @@ namespace BlueRecandy.Controllers
 
             try
             {
-                _context.Update(product);
-                await _context.SaveChangesAsync();
+                _productsService.UpdateProduct(product);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -222,8 +222,8 @@ namespace BlueRecandy.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _productsService.GetProductById(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            _productsService.DeleteProduct(product);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -235,7 +235,7 @@ namespace BlueRecandy.Controllers
         public async Task<IActionResult> Download(int? id)
         {
 
-            var product = await _context.Products.FirstAsync(x => x.Id == id);
+            var product = await _productsService.GetProductById(id);
 
             if (product.SourceFileContents != null)
             {
