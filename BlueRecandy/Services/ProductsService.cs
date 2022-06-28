@@ -22,8 +22,20 @@ namespace BlueRecandy.Services
 
 		public bool ValidateProduct(Product product)
 		{
-			bool externalUrlCheck = product.UseExternalURL ? product.DownloadURL != null : product.SourceFileContents != null;
-			return product.Name != null && product.OwnerId != null && product.Price >= 0 && externalUrlCheck;
+			bool externalUrlCheck;
+			if (product.UseExternalURL)
+			{
+				externalUrlCheck = product.DownloadURL != null;
+			}
+			else
+			{
+				externalUrlCheck = product.SourceFileName != null;
+			}
+
+
+			bool detailsCheck = product.Name != null && product.OwnerId != null;
+			bool priceCheck = product.Price >= 0;
+			return detailsCheck && priceCheck && externalUrlCheck;
 		}
 
 		public async Task<Product?> GetProductById(int? id)
