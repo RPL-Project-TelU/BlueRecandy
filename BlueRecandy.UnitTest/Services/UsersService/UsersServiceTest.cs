@@ -39,5 +39,26 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             // Assert
             Assert.Equal(result.Email, user.Email);
         }
+         
+        [Fact]
+        public void GetUserByClaims_ClaimsIsNull_UserIsNull()
+        {
+            var mockService = new Mock<IUsersService>();
+
+            var user = new ApplicationUser();
+            user.Id = "1";
+            user.Email = null;
+            user.FullName = null;
+
+            mockService.Setup(m => m.GetUserByClaims(null)).ReturnsAsync(user);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserByClaims(null);
+            var result = actionResult.Result;
+
+            // Assert
+            Assert.Equal(result.Email, user.Email);
+        }
     }
 }
