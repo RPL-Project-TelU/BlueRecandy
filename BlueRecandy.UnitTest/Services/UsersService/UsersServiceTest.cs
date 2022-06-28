@@ -22,7 +22,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             {
                 new Claim(ClaimTypes.NameIdentifier, "Alex Vender Joz"),
                 new Claim(ClaimTypes.Name, "alexvenderjoz@gmail.com"),
-            }, "TestAuthentication"));
+            },  "TestAuthentication"));
 
             var user = new ApplicationUser();
             user.Id = "1";
