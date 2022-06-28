@@ -60,5 +60,25 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             // Assert
             Assert.Equal(result.Email, user.Email);
         }
+
+        [Fact]
+        public void GetUserByEmail_EmailNotNull_UserIsNotNull()
+        {
+            var mockService = new Mock<IUsersService>();
+            var user = new ApplicationUser();
+            user.Id = "1";
+            user.Email = "alexvenderjoz@gmail.com";
+            user.FullName = "Alex Vender Joz";
+
+            mockService.Setup(m => m.GetUserByEmail("alexvenderjoz@gmail.com")).ReturnsAsync(user);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserByEmail("alexvenderjoz@gmail.com");
+            var result = actionResult.Result;
+
+            // Assert 
+            Assert.NotNull(result);
+        }
     }
 }
