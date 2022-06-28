@@ -122,7 +122,7 @@ namespace BlueRecandy.Controllers
             product.OwnerId = owner.Id;
 
             if (_productsService.ValidateProduct(product)) {
-                _productsService.AddProduct(product);
+                await _productsService.AddProduct(product);
             }
 
             return RedirectToAction(nameof(Index));
@@ -225,7 +225,7 @@ namespace BlueRecandy.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _productsService.GetProductById(id);
-            _productsService.DeleteProduct(product);
+            await _productsService.DeleteProduct(product);
 
             return RedirectToAction(nameof(Index));
         }
