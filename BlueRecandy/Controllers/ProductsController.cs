@@ -50,8 +50,9 @@ namespace BlueRecandy.Controllers
             {
                 ViewBag.SearchStatus = false;
             }
-            return View("Index", await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains
-            (SearchPhrase)).ToListAsync());
+            var searchResult = await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains(SearchPhrase))
+                .ToListAsync();
+            return View("Index", searchResult);
         }
 
         // GET: Products/Details/5
@@ -232,7 +233,7 @@ namespace BlueRecandy.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        public bool ProductExists(int id)
         {
             return _productsService.IsProductExists(id);
         }
