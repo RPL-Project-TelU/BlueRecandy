@@ -25,10 +25,12 @@ namespace BlueRecandy.Controllers
 
         // GET: Products
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _productsService.GetProductsIncludeOwner();
-            return View(await applicationDbContext.ToListAsync());
+            var products = _productsService.GetProductsIncludeOwner();
+            var view = View(products);
+            view.ViewData["Title"] = "Products";
+            return view;
         }
 
         // GET: Products/ShowSearchForm
