@@ -394,16 +394,36 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 		}
 
 		[Fact]
-		public void ShowSearchForms()
+		public void ShowSearchForm()
 		{
+			// Arrange
+			var controller = new ProductsController(null, null);
+            // Act
+            var result = controller.ShowSearchForm();
+			// Assert
+			Assert.NotNull(result);
+			var view = Assert.IsType<ViewResult>(result);
+        }
 
-		}
-
-		[Fact]
+        [Fact]
 		public void ShowSearchResults()
 		{
+			// Arrange 
+			var product = new List<Product>().AsQueryable();
+			var mockProductService = new Mock<IProductsService>(MockBehavior.Strict);
+			mockProductService.Setup(x => x.GetProductsIncludeOwner()).Returns(product);
+			var productService = mockProductService.Object;
 
+			var controller = new ProductsController(productService, null);
+			// Act
+			var result = controller.ShowSearchResults("BirdyMail");
+			var result2 = result.Result;
+			// Assert
+			Assert.NotNull(result2);
+			var view = Assert.IsType<ViewResult>(result2);
+			Assert.NotNull(view);
+			var Model = view.Model as IEnumerable<Product>;	
+			Assert.Empty(Model);
 		}
-
 	}
 }
