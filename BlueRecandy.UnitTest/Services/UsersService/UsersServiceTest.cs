@@ -202,7 +202,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             // Arrange
             var mockService = new Mock<IUsersService>();
             var User = new ApplicationUser();
-            User.Id = "2";
+            User.Id = "1";
             User.FullName = "Ardian prasetyo";
 
             mockService.Setup(m => m.GetUserById("Ardian Prasetyo")).ReturnsAsync(value: null);
