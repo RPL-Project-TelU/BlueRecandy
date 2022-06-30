@@ -195,5 +195,25 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             Assert.Null(result);
 
         }
+
+        [Fact]
+        public void GetUsersById_IdNotNull_UserIsNull()
+        {
+            // Arrange
+            var mockService = new Mock<IUsersService>();
+            var User = new ApplicationUser();
+            User.Id = "2";
+            User.FullName = "Ardian prasetyo";
+
+            mockService.Setup(m => m.GetUserById("Ardian Prasetyo")).ReturnsAsync(value: null);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserById("Ardian Prasetyo");
+            var result = actionResult.Result;
+
+            // Assert 
+            Assert.Null(result);
+        }
     }
 }
