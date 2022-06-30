@@ -64,7 +64,7 @@ namespace BlueRecandy.Services
 			return products.Where(p => p.OwnerId == ownerId);
 		}
 
-		public IQueryable<Product?> GetProductsIncludeOwner()
+		public IQueryable<Product> GetProductsIncludeOwner()
         {
 			var queryProducts = _context.Products.Include(p => p.Owner);
 

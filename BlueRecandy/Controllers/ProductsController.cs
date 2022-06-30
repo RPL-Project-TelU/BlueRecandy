@@ -25,10 +25,12 @@ namespace BlueRecandy.Controllers
 
         // GET: Products
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _productsService.GetProductsIncludeOwner();
-            return View(await applicationDbContext.ToListAsync());
+            var products = _productsService.GetProductsIncludeOwner();
+            var view = View(products);
+            view.ViewData["Title"] = "Products";
+            return view;
         }
 
         // GET: Products/ShowSearchForm
@@ -48,8 +50,9 @@ namespace BlueRecandy.Controllers
             {
                 ViewBag.SearchStatus = false;
             }
-            return View("Index", await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains
-            (SearchPhrase)).ToListAsync());
+            var searchResult = await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains(SearchPhrase))
+                .ToListAsync();
+            return View("Index", searchResult);
         }
 
         // GET: Products/Details/5
@@ -230,7 +233,7 @@ namespace BlueRecandy.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        public bool ProductExists(int id)
         {
             return _productsService.IsProductExists(id);
         }
