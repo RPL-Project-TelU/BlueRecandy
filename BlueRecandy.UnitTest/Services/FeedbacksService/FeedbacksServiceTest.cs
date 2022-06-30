@@ -24,11 +24,30 @@ namespace BlueRecandy.UnitTest.Services.FeedbacksService
             var service = mockService.Object;
 
             // Act
-            var actionResult = service.GetFeedbacksById(feedback.Id);
+            var actionResult = service.GetFeedbacksById(1);
             var result = actionResult.Result;
 
             // Assert
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void GetFeedbacksById_IdNotNull_FeedbacksIsNull()
+        {
+            // Arrange
+            var mockService = new Mock<IFeedbacksService>();
+            var feedback = new Feedback();
+            feedback.Id = 1;
+            feedback.FeedbackContent = "bagus";
+            mockService.Setup(m => m.GetFeedbacksById(1)).ReturnsAsync(value: null);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetFeedbacksById(1);
+            var result = actionResult.Result;
+
+            // Assert
+            Assert.Null(result);
         }
 
         [Fact]
@@ -39,7 +58,7 @@ namespace BlueRecandy.UnitTest.Services.FeedbacksService
             var feedback = new Feedback();
             feedback.Id = 1;
             feedback.FeedbackContent = "bagus";
-            mockService.Setup(m => m.GetFeedbacksById(1)).ReturnsAsync(feedback);
+            mockService.Setup(m => m.GetFeedbacksById(null)).ReturnsAsync(value: null);
             var service = mockService.Object;
 
             // Act
