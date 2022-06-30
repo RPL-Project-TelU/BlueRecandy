@@ -37,20 +37,27 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var result = actionResult.Result;
 
             // Assert
+            Assert.NotNull(result);
             Assert.Equal(result.Email, user.Email);
         }
-         
+
         [Fact]
-        public void GetUserByClaims_ClaimsIsNull_UserIsNull()
+        public void GetUserByClaims_ClaimsNotNull_UserIsNull()
         {
             // Arrange
             var mockService = new Mock<IUsersService>();
+            var principal = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, "Alex Vender Joz"),
+                new Claim(ClaimTypes.Name, "alexvenderjoz@gmail.com"),
+            }, "TestAuthentication"));
+
             var user = new ApplicationUser();
             user.Id = "1";
-            user.Email = null;
-            user.FullName = null;
+            user.Email = "alexvenderjoz@gmail.com";
+            user.FullName = "Alex Vender Joz";
 
-            mockService.Setup(m => m.GetUserByClaims(null)).ReturnsAsync(user);
+            mockService.Setup(m => m.GetUserByClaims(principal)).ReturnsAsync(value: null);
             var service = mockService.Object;
 
             // Act
@@ -58,7 +65,34 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var result = actionResult.Result;
 
             // Assert
-            Assert.Equal(result.Email, user.Email);
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void GetUserByClaims_ClaimsIsNull_UserIsNull()
+        {
+            // Arrange
+            var mockService = new Mock<IUsersService>();
+            var principal = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, "Alex Vender Joz"),
+                new Claim(ClaimTypes.Name, "alexvenderjoz@gmail.com"),
+            }, "TestAuthentication"));
+
+            var user = new ApplicationUser();
+            user.Id = "1";
+            user.Email = "alexvenderjoz@gmail.com";
+            user.FullName = "Alex Vender Joz";
+
+            mockService.Setup(m => m.GetUserByClaims(null)).ReturnsAsync(value: null);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserByClaims(null);
+            var result = actionResult.Result;
+
+            // Assert
+            Assert.Null(result);
         }
 
         [Fact]
