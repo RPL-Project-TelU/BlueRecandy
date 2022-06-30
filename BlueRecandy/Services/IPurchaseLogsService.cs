@@ -11,5 +11,7 @@ namespace BlueRecandy.Services
 
 		IEnumerable<PurchaseLog> GetPurchaseLogsByUserId(string userId);
 
+		Task<int> AddPurchaseLog(PurchaseLog log);
+
 	}
 }

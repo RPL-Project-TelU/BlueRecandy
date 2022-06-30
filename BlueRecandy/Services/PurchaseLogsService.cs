@@ -13,6 +13,12 @@ namespace BlueRecandy.Services
 			_context = context;
 		}
 
+		public async Task<int> AddPurchaseLog(PurchaseLog log)
+		{
+			_context.Add(log);
+			return await _context.SaveChangesAsync();
+		}
+
 		public IEnumerable<PurchaseLog> GetPurchaseLogs()
 		{
 			var logs = _context.PurchaseLogs.Include(l => l.User).Include(l => l.Product);
