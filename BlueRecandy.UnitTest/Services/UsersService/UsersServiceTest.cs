@@ -165,7 +165,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var mockService = new Mock<IUsersService>();
             var User = new ApplicationUser();
             User.Id = "1";
-            User.FullName = "bagus prasetyo";
+            User.FullName = "Ardian prasetyo";
             mockService.Setup(m => m.GetUserById("1")).ReturnsAsync(User);
             var service = mockService.Object;
 
@@ -183,7 +183,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var mockService = new Mock<IUsersService>();
             var User = new ApplicationUser();
             User.Id = "1";
-            User.FullName = "bagus prasetyo";
+            User.FullName = "Ardian prasetyo";
             mockService.Setup(m => m.GetUserById("1")).ReturnsAsync(User);
             var service = mockService.Object;
 
