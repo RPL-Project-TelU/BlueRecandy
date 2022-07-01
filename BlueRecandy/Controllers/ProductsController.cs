@@ -40,9 +40,10 @@ namespace BlueRecandy.Controllers
             return View();
         }
 
+
         // PoST: Products/ShowSearchResults
         [AllowAnonymous]
-        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        public IActionResult ShowSearchResults(string SearchPhrase)
         {
             var products = _productsService.GetProductsIncludeOwner();
             ViewBag.SearchStatus = true;
@@ -50,8 +51,8 @@ namespace BlueRecandy.Controllers
             {
                 ViewBag.SearchStatus = false;
             }
-            var searchResult = await products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains(SearchPhrase))
-                .ToListAsync();
+            var searchResult = products.Where(j => j.Name.Contains(SearchPhrase) || j.Description.Contains(SearchPhrase))
+                .ToList();
             return View("Index", searchResult);
         }
 

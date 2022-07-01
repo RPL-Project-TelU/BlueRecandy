@@ -17,22 +17,19 @@ namespace BlueRecandy.Controllers
     [Authorize] 
     public class FeedbacksController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IFeedbacksService _service;         /******* HERE ********/
+        private readonly IFeedbacksService _feedbackService;         
+        private readonly IUsersService _usersService;
 
-        public FeedbacksController(ApplicationDbContext context, IFeedbacksService service, UserManager<ApplicationUser> userManager)
+        public FeedbacksController(IFeedbacksService feedbackService, IUsersService usersService)
         {
-            _service = service;             /******* HERE ********/
-            _userManager = userManager;
-            _context = context;
+            _feedbackService = feedbackService;
+            _usersService = usersService;
         }
 
         // GET: Feedbacks
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Feedbacks.Include(f => f.Product).Include(f => f.User);
-            return View(await applicationDbContext.ToListAsync());
+            return View(_feedbackService.GetAllFeedbacks());
         }
 
         // GET: Feedbacks/Details/5
@@ -43,7 +40,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var feedback = await _service.GetFeedbacksById(id);                 /******* HERE ********/
+            var feedback = await _feedbackService.GetFeedbacksById(id);
 
             if (feedback == null)
             {
@@ -58,7 +55,6 @@ namespace BlueRecandy.Controllers
         {
             ViewBag.ProductId = productId;
             TempData["ProductId"] = productId;
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -69,15 +65,14 @@ namespace BlueRecandy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FeedbackContent,Rating")] Feedback feedback)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _usersService.GetUserByClaims(User);
 
             var productId = TempData["ProductId"];
 
             feedback.UserId = user.Id;
-            feedback.ProductId = (int)productId;
+            feedback.ProductId = (int) productId;
 
-            _context.Add(feedback);
-            await _context.SaveChangesAsync();
+            await _feedbackService.AddFeedback(feedback);
 
             return RedirectToAction(nameof(Index));
         }
@@ -90,13 +85,11 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var feedback = await _context.Feedbacks.FindAsync(id);
+            var feedback = await _feedbackService.GetFeedbacksById(id);
             if (feedback == null)
             {
                 return NotFound();
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "DownloadURL", feedback.ProductId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", feedback.UserId);
             return View(feedback);
         }
 
@@ -116,8 +109,7 @@ namespace BlueRecandy.Controllers
             {
                 try
                 {
-                    _context.Update(feedback);
-                    await _context.SaveChangesAsync();
+                    await _feedbackService.UpdateFeedback(feedback);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -132,8 +124,6 @@ namespace BlueRecandy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "DownloadURL", feedback.ProductId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", feedback.UserId);
             return View(feedback);
         }
 
@@ -145,7 +135,7 @@ namespace BlueRecandy.Controllers
                 return NotFound();
             }
 
-            var feedback = await _service.GetFeedbacksById(id);                 /******* HERE ********/
+            var feedback = await _feedbackService.GetFeedbacksById(id);
 
             if (feedback == null)
             {
@@ -160,15 +150,14 @@ namespace BlueRecandy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var feedback = await _context.Feedbacks.FindAsync(id);
-            _context.Feedbacks.Remove(feedback);
-            await _context.SaveChangesAsync();
+            var feedback = await _feedbackService.GetFeedbacksById(id);
+            await _feedbackService.DeleteFeedback(feedback);
             return RedirectToAction(nameof(Index));
         }
 
         private bool FeedbackExists(int id)
         {
-            return _context.Feedbacks.Any(e => e.Id == id);
+            return _feedbackService.IsFeedbackExists(id);
         }
     }
 }
