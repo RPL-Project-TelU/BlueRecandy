@@ -165,7 +165,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var mockService = new Mock<IUsersService>();
             var User = new ApplicationUser();
             User.Id = "1";
-            User.FullName = "bagus prasetyo";
+            User.FullName = "Ardian prasetyo";
             mockService.Setup(m => m.GetUserById("1")).ReturnsAsync(User);
             var service = mockService.Object;
 
@@ -183,7 +183,7 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             var mockService = new Mock<IUsersService>();
             var User = new ApplicationUser();
             User.Id = "1";
-            User.FullName = "bagus prasetyo";
+            User.FullName = "Ardian prasetyo";
             mockService.Setup(m => m.GetUserById("1")).ReturnsAsync(User);
             var service = mockService.Object;
 
@@ -194,6 +194,26 @@ namespace BlueRecandy.UnitTest.Services.UsersService
             // Assert
             Assert.Null(result);
 
+        }
+
+        [Fact]
+        public void GetUsersById_IdNotNull_UserIsNull()
+        {
+            // Arrange
+            var mockService = new Mock<IUsersService>();
+            var User = new ApplicationUser();
+            User.Id = "1";
+            User.FullName = "Ardian prasetyo";
+
+            mockService.Setup(m => m.GetUserById("Ardian Prasetyo")).ReturnsAsync(value: null);
+            var service = mockService.Object;
+
+            // Act
+            var actionResult = service.GetUserById("Ardian Prasetyo");
+            var result = actionResult.Result;
+
+            // Assert 
+            Assert.Null(result);
         }
     }
 }
