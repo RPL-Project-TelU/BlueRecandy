@@ -4,12 +4,9 @@ using BlueRecandy.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using static BlueRecandy.Controllers.UserController;
 
@@ -130,11 +127,6 @@ namespace BlueRecandy.UnitTest.Controller.UsersController
 				new Claim(ClaimTypes.Email, user.Email)
 			}));
 			mockUserService.Setup(x => x.GetUserByClaims(principal)).ReturnsAsync(user);
-
-			var logs = new List<PurchaseLog>()
-			{
-				new PurchaseLog(){UserId = user.Id, ProductId = 13}
-			}.AsEnumerable();
 
 			var httpContext = new DefaultHttpContext() { User = principal };
 			var controllerContext = new ControllerContext() { HttpContext = httpContext };
