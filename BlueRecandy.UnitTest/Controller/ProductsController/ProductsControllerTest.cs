@@ -417,10 +417,10 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 			var controller = new ProductsController(productService, null);
 			// Act
 			var result = controller.ShowSearchResults("BirdyMail");
-			var result2 = result.Result;
+
 			// Assert
-			Assert.NotNull(result2);
-			var view = Assert.IsType<ViewResult>(result2);
+			Assert.NotNull(result);
+			var view = Assert.IsType<ViewResult>(result);
 			Assert.NotNull(view);
 			var Model = view.Model as IEnumerable<Product>;	
 			Assert.Empty(Model);
