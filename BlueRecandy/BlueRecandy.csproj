@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+	<DebugType>full</DebugType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-BlueRecandy-6DB58132-BD08-4269-81D9-142ED1195661</UserSecretsId>
@@ -21,6 +22,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
 
 	  <PackageReference Include="OrchardCore.Localization.Core" Version="1.4.0" />
+
+	  <PackageReference Include="SonarAnalyzer.CSharp" Version="8.40.0.48530">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 	  
