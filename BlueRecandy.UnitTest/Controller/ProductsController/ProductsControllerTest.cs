@@ -425,5 +425,29 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 			var Model = view.Model as IEnumerable<Product>;	
 			Assert.Empty(Model);
 		}
+
+		[Fact]
+		public void ShowSearchResultsPositive()
+		{
+			// Arrange 
+			var product = new List<Product>()
+            {
+				new Product() { Id = 1 , Name = "BirdyMail", Description = "BirdyMail App" },
+            } .AsQueryable();
+			var mockProductService = new Mock<IProductsService>(MockBehavior.Strict);
+			mockProductService.Setup(x => x.GetProductsIncludeOwner()).Returns(product);
+			var productService = mockProductService.Object;
+			
+			var controller = new ProductsController(productService, null);
+			// Act
+			var result = controller.ShowSearchResults("BirdyMail");
+			var result2 = result.Result;
+			// Assert
+			Assert.NotNull(result2);
+			var view = Assert.IsType<ViewResult>(result2);
+			Assert.NotNull(view);
+			var Model = view.Model as IEnumerable<Product>;
+			Assert.Empty(Model);
+		}
 	}
 }
