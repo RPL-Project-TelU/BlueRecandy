@@ -53,9 +53,10 @@ namespace BlueRecandy.Controllers
         // GET: Feedbacks/Create
         public IActionResult Create(int? productId)
         {
+            if (productId == null) return RedirectToAction(nameof(Index));
+
             ViewBag.ProductId = productId;
-            TempData["ProductId"] = productId;
-            return View();
+            return View(new Feedback() { ProductId = productId.Value });
         }
 
         // POST: Feedbacks/Create
@@ -67,10 +68,11 @@ namespace BlueRecandy.Controllers
         {
             var user = await _usersService.GetUserByClaims(User);
 
-            var productId = TempData["ProductId"];
+            var productIdQuery = Request.Query["product"];
+            var productId = int.Parse(productIdQuery[0]);
 
             feedback.UserId = user.Id;
-            feedback.ProductId = (int) productId;
+            feedback.ProductId = productId;
 
             await _feedbackService.AddFeedback(feedback);
 
@@ -113,7 +115,8 @@ namespace BlueRecandy.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FeedbackExists(feedback.Id))
+                    bool feedbackExists = _feedbackService.IsFeedbackExists(feedback.Id);
+                    if (!feedbackExists)
                     {
                         return NotFound();
                     }
@@ -153,11 +156,6 @@ namespace BlueRecandy.Controllers
             var feedback = await _feedbackService.GetFeedbacksById(id);
             await _feedbackService.DeleteFeedback(feedback);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool FeedbackExists(int id)
-        {
-            return _feedbackService.IsFeedbackExists(id);
         }
     }
 }
