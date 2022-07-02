@@ -538,8 +538,7 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
             var result = controller.ShowSearchForm();
 			// Assert
 			Assert.NotNull(result);
-			var view = Assert.IsType<ViewResult>(result);
-			Assert.Equal("Search", view.ViewName);
+			Assert.IsType<ViewResult>(result);
         }
 
         [Fact]
