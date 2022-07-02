@@ -1,9 +1,11 @@
 ﻿using BlueRecandy.Data;
 using BlueRecandy.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlueRecandy.Services
 {
+	[ExcludeFromCodeCoverage]
 	public class ProductsService : IProductsService
 	{
 
