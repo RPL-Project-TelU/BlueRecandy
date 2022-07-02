@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRecandy", "BlueRecandy\BlueRecandy.csproj", "{17E54D65-8664-4C79-8C2C-0E6CBA59751A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueRecandy", "BlueRecandy\BlueRecandy.csproj", "{17E54D65-8664-4C79-8C2C-0E6CBA59751A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRecandy.UnitTest", "BlueRecandy.UnitTest\BlueRecandy.UnitTest.csproj", "{1B353774-78A4-49EA-9AA7-F94E85285C0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{17E54D65-8664-4C79-8C2C-0E6CBA59751A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17E54D65-8664-4C79-8C2C-0E6CBA59751A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17E54D65-8664-4C79-8C2C-0E6CBA59751A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B353774-78A4-49EA-9AA7-F94E85285C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B353774-78A4-49EA-9AA7-F94E85285C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B353774-78A4-49EA-9AA7-F94E85285C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B353774-78A4-49EA-9AA7-F94E85285C0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
