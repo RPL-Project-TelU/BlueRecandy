@@ -117,7 +117,6 @@ namespace BlueRecandy.Controllers
                         product.SourceFileName = sourceFile.FileName;
                         product.SourceFileContentType = sourceFile.ContentType;
                         product.SourceFileContents = contents;
-
                     }
                 }
             }
@@ -194,7 +193,8 @@ namespace BlueRecandy.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(product.Id))
+                bool isProductExists = _productsService.IsProductExists(product.Id);
+                if (!isProductExists)
                 {
                     return NotFound();
                 }
@@ -232,11 +232,6 @@ namespace BlueRecandy.Controllers
             await _productsService.DeleteProduct(product);
 
             return RedirectToAction(nameof(Index));
-        }
-
-        public bool ProductExists(int id)
-        {
-            return _productsService.IsProductExists(id);
         }
 
         public async Task<IActionResult> Download(int? id)

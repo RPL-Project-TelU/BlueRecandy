@@ -75,13 +75,13 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 			// Arrange
 			var mockProductService = new Mock<IProductsService>();
 
-			mockProductService.Setup(m => m.GetProductById(It.IsAny<int>())).ReturnsAsync(value: null);
+			mockProductService.Setup(m => m.GetProductById(1)).ReturnsAsync(value: null);
 
 			var controller = new ProductsController(mockProductService.Object, null);
 
 			// Act
-			var actionResult = controller.Details(It.IsAny<int>());
-			var result = actionResult.Result as NotFoundResult;
+			var actionResult = controller.Details(1);
+			var result = actionResult.Result;
 
 			// Assert
 			Assert.NotNull(result);
@@ -100,7 +100,7 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 
 			// Act
 			var actionResult = controller.Details(null);
-			var result = actionResult.Result as NotFoundResult;
+			var result = actionResult.Result;
 
 			// Assert
 			Assert.NotNull(result);
@@ -143,10 +143,56 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 				UseExternalURL = true,
 				DownloadURL = "yes.com"
 			};
+			mockProductService.Setup(x => x.ValidateProduct(product)).Returns(true);
+			mockProductService.Setup(m => m.AddProduct(product)).ReturnsAsync(1);
 
 			var controller = new ProductsController(mockProductService.Object, mockUserService.Object);
 			// Act
 			var actionResult = controller.Create(null, product);
+			var result = actionResult.Result;
+
+			// Assert
+			Assert.NotNull(result);
+			var redirect = Assert.IsType<RedirectToActionResult>(result);
+			Assert.Equal("Index", redirect.ActionName);
+		}
+
+		[Fact]
+		public void Create_UploadProduct_UseFile_CreateProduct()
+		{
+			// Arrange
+			var mockUserService = new Mock<IUsersService>();
+			var mockProductService = new Mock<IProductsService>();
+
+			var user = new ApplicationUser()
+			{
+				Id = "1",
+				FullName = "Aaaa",
+				Email = "a@gmail.com",
+				UserName = "Aaaaa"
+			};
+			mockUserService.Setup(x => x.GetUserByClaims(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
+
+			var mockFile = new Mock<IFormFile>();
+			mockFile.Setup(x => x.FileName).Returns("test");
+			mockFile.Setup(x => x.ContentType).Returns("application/json");
+			mockFile.Setup(x => x.Length).Returns(0);
+			mockFile.Setup(x => x.OpenReadStream()).Returns(new MemoryStream());
+			var file = mockFile.Object;
+			var product = new Product()
+			{
+				Id = 1,
+				Name = "Test",
+				Description = "Tes",
+				Price = 0,
+				UseExternalURL = false
+			};
+			mockProductService.Setup(x => x.ValidateProduct(product)).Returns(true);
+			mockProductService.Setup(m => m.AddProduct(product)).ReturnsAsync(1);
+
+			var controller = new ProductsController(mockProductService.Object, mockUserService.Object);
+			// Act
+			var actionResult = controller.Create(file, product);
 			var result = actionResult.Result;
 
 			// Assert
@@ -237,6 +283,75 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 		}
 
 		[Fact]
+		public void Edit_ProductIdNotSame_NullFile_HasProduct_ShouldNotFound()
+		{
+			var mockProductService = new Mock<IProductsService>();
+			var mockUserService = new Mock<IUsersService>();
+
+			var owner = new ApplicationUser() { Id = "my_id", Email = "a", Wallet = 100, FullName = "Sip" };
+			var principal = new ClaimsPrincipal(new ClaimsIdentity(new[]
+			{
+				new Claim(ClaimTypes.NameIdentifier, owner.Id)
+			}));
+			mockUserService.Setup(x => x.GetUserByClaims(principal)).ReturnsAsync(owner);
+
+			var product = new Product() { Id = 1, Name = "test", Description = "oke", UseExternalURL = false };
+			mockProductService.Setup(x => x.ValidateProduct(product)).Returns(true);
+			mockProductService.Setup(x => x.UpdateProduct(product)).ReturnsAsync(1);
+
+			var httpContext = new DefaultHttpContext();
+			var controllerContext = new ControllerContext() { HttpContext = httpContext };
+			var controller = new ProductsController(mockProductService.Object, mockUserService.Object)
+			{
+				ControllerContext = controllerContext
+			};
+
+			var actionResult = controller.Edit(3, null, product);
+			var result = actionResult.Result;
+
+			Assert.NotNull(result);
+			Assert.IsType<NotFoundResult>(result);
+		}
+
+		[Fact]
+		public void Edit_ProductIdNotNull_HasFile_HasProduct_ShouldRedirect()
+		{
+			var mockProductService = new Mock<IProductsService>();
+			var mockUserService = new Mock<IUsersService>();
+
+			var owner = new ApplicationUser() { Id = "my_id", Email = "a", Wallet = 100, FullName = "Sip"};
+			var principal = new ClaimsPrincipal(new ClaimsIdentity(new[]
+			{
+				new Claim(ClaimTypes.NameIdentifier, owner.Id)
+			}));
+			mockUserService.Setup(x => x.GetUserByClaims(principal)).ReturnsAsync(owner);
+
+			var mockFile = new Mock<IFormFile>();
+			mockFile.Setup(x => x.FileName).Returns("test");
+			mockFile.Setup(x => x.ContentType).Returns("application/json");
+			mockFile.Setup(x => x.Length).Returns(0);
+			mockFile.Setup(x => x.OpenReadStream()).Returns(new MemoryStream());
+			var file = mockFile.Object;
+
+			var product = new Product() { Id = 1, Name = "test", Description = "oke", UseExternalURL = false };
+			mockProductService.Setup(x => x.ValidateProduct(product)).Returns(true);
+			mockProductService.Setup(x => x.UpdateProduct(product)).ReturnsAsync(1);
+
+			var httpContext = new DefaultHttpContext();
+			var controllerContext = new ControllerContext() { HttpContext = httpContext };
+			var controller = new ProductsController(mockProductService.Object, mockUserService.Object)
+			{
+				ControllerContext = controllerContext
+			};
+
+			var actionResult = controller.Edit(product.Id, file, product);
+			var result = actionResult.Result;
+
+			Assert.NotNull(result);
+			Assert.IsType<RedirectToActionResult>(result);
+		}
+
+		[Fact]
 		public void Delete_HasId_ShouldViewPage()
 		{
 			// Arrange
@@ -304,36 +419,6 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 		}
 
 		[Fact]
-		public void ProductExists_CorrectId_ShouldExists()
-		{
-			// Arrange
-			var mockProductService = new Mock<IProductsService>(MockBehavior.Strict);
-			mockProductService.Setup(x => x.IsProductExists(1)).Returns(true);
-
-			var controller = new ProductsController(mockProductService.Object, null);
-			// Act
-			var result = controller.ProductExists(1);
-
-			// Assert
-			Assert.True(result);
-		}
-
-		[Fact]
-		public void ProductExists_IncorrectId_ShouldNotExists()
-		{
-			// Arrange
-			var mockProductService = new Mock<IProductsService>(MockBehavior.Strict);
-			mockProductService.Setup(x => x.IsProductExists(1)).Returns(false);
-
-			var controller = new ProductsController(mockProductService.Object, null);
-			// Act
-			var result = controller.ProductExists(1);
-
-			// Assert
-			Assert.False(result);
-		}
-
-		[Fact]
 		public void Download_HasSourceFile_ShouldDownload()
 		{
 			// Arrange
@@ -394,6 +479,57 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
 		}
 
 		[Fact]
+		public void PaymentProceed_NoId_ShouldNotFound()
+		{
+			var mockProductService = new Mock<IProductsService>();
+			var mockUsersService = new Mock<IUsersService>();
+
+			var controller = new ProductsController(mockProductService.Object, mockUsersService.Object);
+
+			var actionResult = controller.PaymentProceed(null, false);
+			var result = actionResult.Result;
+
+			Assert.NotNull(result);
+			Assert.IsType<NotFoundResult>(result);
+		}
+
+		[Fact]
+		public void PaymentProceed_HasId_ProductIsNull_ShouldNotFound()
+		{
+			var mockProductService = new Mock<IProductsService>();
+			var mockUsersService = new Mock<IUsersService>();
+
+			mockProductService.Setup(x => x.GetProductById(1)).ReturnsAsync(value: null);
+
+			var controller = new ProductsController(mockProductService.Object, mockUsersService.Object);
+
+			var actionResult = controller.PaymentProceed(1, false);
+			var result = actionResult.Result;
+
+			Assert.NotNull(result);
+			Assert.IsType<NotFoundResult>(result);
+		}
+
+		[Fact]
+		public void PaymentProceed_HasId_ProductNotNull_ShouldNotFound()
+		{
+			var mockProductService = new Mock<IProductsService>();
+			var mockUsersService = new Mock<IUsersService>();
+
+			var product = new Product() { Id = 1, Name = "aaa" };
+			mockProductService.Setup(x => x.GetProductById(1)).ReturnsAsync(product);
+
+			var controller = new ProductsController(mockProductService.Object, mockUsersService.Object);
+
+			var actionResult = controller.PaymentProceed(1, false);
+			var result = actionResult.Result;
+
+			Assert.NotNull(result);
+			var view = Assert.IsType<ViewResult>(result);
+			Assert.Equal("Details", view.ViewName);
+		}
+
+		[Fact]
 		public void ShowSearchForm()
 		{
 			// Arrange
@@ -402,7 +538,7 @@ namespace BlueRecandy.UnitTest.Controller.ProductController
             var result = controller.ShowSearchForm();
 			// Assert
 			Assert.NotNull(result);
-			var view = Assert.IsType<ViewResult>(result);
+			Assert.IsType<ViewResult>(result);
         }
 
         [Fact]
