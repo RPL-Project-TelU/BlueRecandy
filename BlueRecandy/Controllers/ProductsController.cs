@@ -37,7 +37,7 @@ namespace BlueRecandy.Controllers
         [AllowAnonymous]
         public IActionResult ShowSearchForm()
         {
-            return View("Search");
+            return View();
         }
 
 
