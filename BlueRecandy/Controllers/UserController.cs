@@ -13,7 +13,6 @@ namespace BlueRecandy.Controllers
 	{
 		private readonly IUsersService _usersService;
 		private readonly IProductsService _productsService;
-		private readonly ApplicationDbContext _context;
 		private readonly IPurchaseLogsService _purchaseLogsService;
 
 		public enum ManagementPage
@@ -23,12 +22,11 @@ namespace BlueRecandy.Controllers
 			PurchaseLogs
         }
 
-		public UserController(IUsersService usersService, IProductsService productsService, IPurchaseLogsService purchaseLogsService, ApplicationDbContext context)
+		public UserController(IUsersService usersService, IProductsService productsService, IPurchaseLogsService purchaseLogsService)
 		{
 			_usersService = usersService;
 			_productsService = productsService;
 			_purchaseLogsService = purchaseLogsService;
-			_context = context;
 		}
 
 		public async Task<IActionResult> Index()
@@ -87,14 +85,18 @@ namespace BlueRecandy.Controllers
 			}else
 			{
 				purchaseLog = product.PurchaseLogs.Find(pl => pl.UserId == user.Id);
-				if (purchaseLog == null)
+				bool isLogNotFound = purchaseLog == null;
+
+				if (isLogNotFound)
 				{
-					if (product.OwnerId == user.Id)
+					bool isOwner = product.OwnerId == user.Id;
+					if (isOwner)
 					{
 						return RedirectToAction(controllerName: "Products", actionName: "Details", routeValues: new { id = id });
 					}
 
-					if (user.Wallet >= product.Price)
+					bool isEnoughWallet = user.Wallet >= product.Price;
+					if (isEnoughWallet)
                     {
 						purchaseLog = new PurchaseLog();
 						purchaseLog.UserId = user.Id;
@@ -102,10 +104,8 @@ namespace BlueRecandy.Controllers
 						purchaseLog.ProductId = id.Value;
 						purchaseLog.Product = product;
 
-						_context.Add(purchaseLog);
-
 						user.Wallet -= product.Price;
-						await _context.SaveChangesAsync();
+						await _purchaseLogsService.AddPurchaseLog(purchaseLog);
 						return RedirectToAction(controllerName: "Products", actionName: "PaymentProceed", routeValues: new { id = id, paymentSuccess = true });
 					}
                     else

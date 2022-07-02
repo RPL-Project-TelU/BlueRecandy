@@ -1,10 +1,12 @@
 ﻿using BlueRecandy.Data;
 using BlueRecandy.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 
 namespace BlueRecandy.Services
 {
+	[ExcludeFromCodeCoverage]
 	public class UsersService : IUsersService
 	{
 
