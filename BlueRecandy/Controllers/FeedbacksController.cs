@@ -76,7 +76,8 @@ namespace BlueRecandy.Controllers
 
             await _feedbackService.AddFeedback(feedback);
 
-            return RedirectToAction(nameof(Index));
+            var redirect = RedirectToAction(controllerName: "Products", actionName: "Details", routeValues: new { id = productId });
+            return redirect;
         }
 
         // GET: Feedbacks/Edit/5
